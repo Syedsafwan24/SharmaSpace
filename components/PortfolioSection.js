@@ -9,7 +9,7 @@ import React  from 'react';
 /*  Project data                                                              */
 /* -------------------------------------------------------------------------- */
 
-const mainProjects = [
+const projects = [
   {
     title: 'Modern Apartment in Bangalore',
     description:
@@ -20,13 +20,10 @@ const mainProjects = [
   {
     title: 'Co-Working Space in Whitefield',
     description:
-      'A vibrant, collaborative workspace designed for productivity and creativity. This modern facility provides a dynamic environment for professionals from various fields in Bangalore’s tech hub.',
+      "A vibrant, collaborative workspace designed for productivity and creativity. This modern facility provides a dynamic environment for professionals from various fields in Bangalore's tech hub.",
     image:
       'https://images.unsplash.com/photo-1497366216548-37526070297c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
   },
-];
-
-const smallerProjects = [
   {
     title: 'Kitchen Design',
     image:
@@ -65,8 +62,9 @@ const HeroCard = ({ project }) => (
     {/* Caption */}
     <div className="relative z-10 flex flex-col justify-end h-full p-6 text-white">
       <h3 className="text-2xl font-semibold leading-snug">{project.title}</h3>
-      <p className="mt-2 text-sm leading-relaxed line-clamp-3">{project.description}</p>
-
+      {project.description && (
+        <p className="mt-2 text-sm leading-relaxed line-clamp-3">{project.description}</p>
+      )}
       <Link
         href="#"
         className="mt-4 inline-flex items-center gap-1 text-sm font-medium tracking-wide hover:text-[#E63946] transition"
@@ -110,16 +108,16 @@ const PortfolioSection = () => (
         </p>
       </header>
 
-      {/* Main (2-col) grid */}
+      {/* Main (2-col) grid for first two projects */}
       <div className="grid gap-8 lg:grid-cols-2 mb-10">
-        {mainProjects.map((project) => (
+        {projects.slice(0, 2).map((project) => (
           <HeroCard key={project.title} project={project} />
         ))}
       </div>
 
-      {/* Thumbnails (3-col on lg) */}
+      {/* Thumbnails (3-col on lg) for the rest */}
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 mb-16">
-        {smallerProjects.map((project) => (
+        {projects.slice(2).map((project) => (
           <ThumbCard key={project.title} project={project} />
         ))}
       </div>

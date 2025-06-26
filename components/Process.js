@@ -2,7 +2,7 @@ import React from 'react';
 
 const Process = () => {
 	return (
-		<section className='bg-[ededed] py-20 px-4 relative overflow-hidden'>
+		<section className='bg-[#fff6f6] py-20 px-4 relative overflow-hidden'>
 			<div className='max-w-6xl mx-auto relative'>
 				{/* Central Timeline Line */}
 				<div

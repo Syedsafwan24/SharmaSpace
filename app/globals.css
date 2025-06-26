@@ -1,3 +1,7 @@
+html {
+  scroll-behavior: smooth;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -71,9 +75,6 @@
   }
   body {
     @apply bg-background text-foreground;
-  }
-  html {
-    scroll-behavior: smooth;
   }
 }
 

@@ -23,7 +23,7 @@ export default function Home() {
 				<DesignInsights />
 				<Portfolio />
 				<Testimonials />
-				<Blog />
+				{/* <Blog /> */}
 			</main>
 			<Footer />
 		</div>

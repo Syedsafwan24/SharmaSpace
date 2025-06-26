@@ -2,14 +2,14 @@ import React from 'react';
 
 const Process = () => {
   return (
-    <section className="bg-white py-20 px-4 relative overflow-hidden">
+    <section className="bg-[ededed] py-20 px-4 relative overflow-hidden">
       <div className="max-w-6xl mx-auto relative">
         {/* Central Timeline Line */}
         <div className="absolute left-1/2 top-0 bottom-0 w-0.5 transform -translate-x-0.5 z-10" 
              style={{ backgroundColor: '#E63946' }}></div>
         
         {/* Step 01 - Consultation */}
-        <div className="flex items-center mb-32 relative">
+        <div className="flex items-center mb-8 relative">
           {/* Left Side - Content Card with Number */}
           <div className="w-1/2 pr-16 flex justify-end">
             <div className="bg-white rounded-2xl shadow-lg p-8 border border-gray-100 relative w-80">
@@ -50,7 +50,7 @@ const Process = () => {
         </div>
         
         {/* Step 02 - Design */}
-        <div className="flex items-center mb-32 relative">
+        <div className="flex items-center mb-8 relative">
           {/* Left Side - Illustration */}
           <div className="w-1/2 pr-16 flex justify-end">
             <div className="bg-white rounded-2xl shadow-lg p-8 border border-gray-100 w-80 h-64 flex items-center justify-center">
@@ -92,7 +92,7 @@ const Process = () => {
           <div className="w-1/2 pl-16">
             <div className="bg-white rounded-2xl shadow-lg p-8 border border-gray-100 relative w-80">
               {/* Number Badge */}
-              <div className="absolute -top-4 -right-4 w-12 h-12 rounded-full flex items-center justify-center text-white font-bold text-lg shadow-lg"
+              <div className="absolute -top-4 -left-4 w-12 h-12 rounded-full flex items-center justify-center text-white font-bold text-lg shadow-lg"
                    style={{ backgroundColor: '#E63946' }}>
                 02
               </div>

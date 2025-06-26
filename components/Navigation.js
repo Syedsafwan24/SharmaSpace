@@ -30,9 +30,9 @@ const Navigation = () => {
 
 	return (
 		<nav
-			className={`fixed top-0 left-0 right-0 py-5 z-50 transition-all duration-500 ease-in-out ${
+			className={`fixed top-0 left-0 right-0 py-3 z-50 transition-all duration-500 ease-in-out ${
 				isScrolled
-					? 'bg-gray-50/95 backdrop-blur-md border-b border-gray-200/30 shadow-sm'
+					? 'bg-white backdrop-blur-md border-gray-200/30 shadow-sm'
 					: 'bg-transparent'
 			}`}
 		>
@@ -42,7 +42,7 @@ const Navigation = () => {
 					<img
 						src='/images/icon/SharmaSpace-Logo.webp'
 						alt='SharmaSpace Logo'
-						className='w-8 h-8 rounded'
+						className='w-10 h-10 rounded'
 					/>
 					<span
 						className={`text-xl font-bold ${

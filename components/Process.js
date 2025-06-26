@@ -11,7 +11,7 @@ const Process = () => {
 				></div>
 
 				{/* Step 01 - Consultation */}
-				<div className='flex items-center mb-8 relative'>
+				<div className='flex items-center mb-8  relative'>
 					{/* Left Side - Content Card with Number */}
 					<div className='w-1/2 pr-16 flex justify-end'>
 						<div className='bg-white rounded-2xl shadow-lg p-8 border border-gray-100 relative w-80'>

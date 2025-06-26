@@ -39,9 +39,11 @@ const Navigation = () => {
 			<div className='max-w-6xl mx-auto px-6 flex justify-between items-center'>
 				{/* Logo */}
 				<div className='flex items-center gap-2 transition-transform duration-300 hover:scale-105 cursor-pointer'>
-					<div className='w-8 h-8 bg-red-600 rounded flex items-center justify-center text-white text-lg font-bold'>
-						S
-					</div>
+					<img
+						src='/images/icon/SharmaSpace-Logo.png'
+						alt='SharmaSpace Logo'
+						className='w-8 h-8 rounded'
+					/>
 					<span
 						className={`text-xl font-bold ${
 							isScrolled ? 'text-gray-900' : 'text-white'

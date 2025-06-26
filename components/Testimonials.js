@@ -181,7 +181,7 @@ const Testimonials = () => {
 					<div className='relative'>
 						<div ref={sliderRef} className='keen-slider py-4'>
 							{testimonials.map((testimonial, index) => (
-								<div key={index} className='keen-slider__slide h-full flex flex-col px-2'>
+								<div key={index} className='keen-slider__slide h-auto px-2'>
 									<TestimonialCard testimonial={testimonial} />
 								</div>
 							))}

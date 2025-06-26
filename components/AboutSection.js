@@ -40,7 +40,7 @@ const AboutSection = () => {
 		<div className='bg-gray-50'>
 			<section
 				id='about-section'
-				className='py-20 lg:py-30 relative bg-gray-50' // <- mb-10 removed here
+				className='py-[150px] lg:py-30 relative bg-gray-50' // <- mb-10 removed here
 			>
 				<div className='max-w-6xl mx-auto px-6'>
 					<div className='grid grid-cols-1 lg:grid-cols-2 gap-20 items-center'>
@@ -96,6 +96,7 @@ const AboutSection = () => {
 					</div>
 				</div>
 			</section>
+
 		</div>
 	);
 };

@@ -2,11 +2,12 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { Instagram, Facebook, Youtube, Twitter } from 'lucide-react';
 
 const Navigation = () => {
 	const [isScrolled, setIsScrolled] = useState(false);
-	const [activeItem, setActiveItem] = useState('Home');
+	const pathname = usePathname();
 
 	const navItems = [
 		{ name: 'Home', path: '/' },
@@ -26,10 +27,6 @@ const Navigation = () => {
 		window.addEventListener('scroll', handleScroll);
 		return () => window.removeEventListener('scroll', handleScroll);
 	}, []);
-
-	const handleNavClick = (itemName) => {
-		setActiveItem(itemName);
-	};
 
 	return (
 		<nav
@@ -62,13 +59,12 @@ const Navigation = () => {
 						<li key={item.name}>
 							<Link href={item.path}>
 								<span
-									onClick={() => handleNavClick(item.name)}
 									className={`${
 										isScrolled
-											? activeItem === item.name
+											? pathname === item.path
 												? 'text-red-600'
 												: 'text-gray-900 hover:text-red-600'
-											: activeItem === item.name
+											: pathname === item.path
 											? 'text-red-600'
 											: 'text-white hover:text-red-600'
 									} no-underline font-medium transition-all duration-300 text-base relative hover:-translate-y-0.5 bg-transparent border-none cursor-pointer`}
@@ -90,8 +86,12 @@ const Navigation = () => {
 					].map(({ Icon, href }, index) => (
 						<Link key={index} href={href}>
 							<Icon
-								size={20}
-								className='text-gray-900 hover:text-red-600 cursor-pointer transition-all duration-300 p-1 hover:scale-110'
+								size={24}
+								className={`transition-all duration-300 p-1 hover:scale-110 cursor-pointer ${
+									isScrolled
+										? 'text-gray-900 hover:text-red-600'
+										: 'text-white hover:text-red-600'
+								}`}
 							/>
 						</Link>
 					))}

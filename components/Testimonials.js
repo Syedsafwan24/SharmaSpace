@@ -60,7 +60,14 @@ const TestimonialCard = ({ testimonial }) => {
 						</div>
 						<div className='text-sm text-gray-500'>{testimonial.location}</div>
 					</div>
-					<ReactStars count={5} size={18} color2={'#facc15'} edit={false} />
+					<ReactStars
+						count={5}
+						size={20}
+						color1={'#e5e7eb'}
+						color2={'#fbbf24'}
+						edit={false}
+						value={5}
+					/>
 				</div>
 			</div>
 		</div>

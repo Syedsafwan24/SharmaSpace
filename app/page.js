@@ -24,7 +24,6 @@ export default function Home() {
 				<DesignInsights />
 				<Portfolio />
 				<Testimonials />
-				<Blog />
 				<TransformSpaceHero />
 			</main>
 			<Footer />

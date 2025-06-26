@@ -6,6 +6,66 @@ import 'keen-slider/keen-slider.min.css';
 import Image from 'next/image';
 import { FaQuoteLeft } from 'react-icons/fa';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import ReactStars from 'react-stars';
+
+const TestimonialCard = ({ testimonial }) => {
+	const [expanded, setExpanded] = useState(false);
+	const textRef = useRef(null);
+	const [needsTruncation, setNeedsTruncation] = useState(false);
+
+	useEffect(() => {
+		if (textRef.current) {
+			setNeedsTruncation(
+				textRef.current.scrollHeight > textRef.current.clientHeight
+			);
+		}
+	}, []);
+
+	return (
+		<div className='h-full bg-gradient-to-br from-white to-gray-50 rounded-xl shadow-md hover:shadow-lg transition-shadow p-8 flex flex-col'>
+			<FaQuoteLeft className='text-red-100 text-2xl mb-4' />
+
+			<div
+				ref={textRef}
+				className={`text-left italic text-gray-700 leading-relaxed mb-6 ${
+					!expanded && needsTruncation ? 'line-clamp-4' : ''
+				}`}
+			>
+				"{testimonial.text}"
+			</div>
+
+			{needsTruncation && (
+				<button
+					onClick={() => setExpanded(!expanded)}
+					className='text-sm text-[#E63946] hover:text-[#c82e3b] self-start mb-6 transition'
+				>
+					{expanded ? 'Read less' : 'Read more'}
+				</button>
+			)}
+
+			<div className='mt-auto pt-4 border-t border-gray-100'>
+				<div className='flex items-center gap-4'>
+					<div className='w-12 h-12 rounded-full overflow-hidden border-2 border-white shadow-sm'>
+						<Image
+							src={testimonial.image}
+							alt={testimonial.name}
+							width={48}
+							height={48}
+							className='w-full h-full object-cover'
+						/>
+					</div>
+					<div className='flex-1'>
+						<div className='font-semibold text-gray-900'>
+							{testimonial.name}
+						</div>
+						<div className='text-sm text-gray-500'>{testimonial.location}</div>
+					</div>
+					<ReactStars count={5} size={18} color2={'#facc15'} edit={false} />
+				</div>
+			</div>
+		</div>
+	);
+};
 
 const Testimonials = () => {
 	const testimonials = [
@@ -47,25 +107,10 @@ const Testimonials = () => {
 	];
 
 	const isCarousel = testimonials.length > 3;
-
-	const containerRef = useRef(null);
-	const [maxHeight, setMaxHeight] = useState(0);
-
-	useEffect(() => {
-		if (containerRef.current) {
-			const cardEls =
-				containerRef.current.querySelectorAll('.testimonial-card');
-			let max = 0;
-			cardEls.forEach((el) => {
-				max = Math.max(max, el.offsetHeight);
-			});
-			setMaxHeight(max);
-		}
-	}, []);
-
 	const [sliderRef, instanceRef] = useKeenSlider({
 		loop: true,
 		slides: {
+			origin: 'center',
 			perView: 3,
 			spacing: 24,
 		},
@@ -85,125 +130,77 @@ const Testimonials = () => {
 		},
 	});
 
-	// Autoplay
+	// Autoplay functionality
 	useEffect(() => {
 		let interval;
-		if (instanceRef.current && isCarousel) {
-			interval = setInterval(() => {
-				instanceRef.current.next();
-			}, 4000);
+		if (isCarousel && instanceRef.current) {
+			const slider = instanceRef.current;
+			const startAutoplay = () => {
+				clearInterval(interval);
+				interval = setInterval(() => {
+					slider.next();
+				}, 5000);
+			};
+
+			startAutoplay();
+			slider.container.addEventListener('mouseover', () =>
+				clearInterval(interval)
+			);
+			slider.container.addEventListener('mouseout', startAutoplay);
+
+			return () => {
+				clearInterval(interval);
+				slider.container.removeEventListener('mouseover', () =>
+					clearInterval(interval)
+				);
+				slider.container.removeEventListener('mouseout', startAutoplay);
+			};
 		}
-		return () => clearInterval(interval);
 	}, [instanceRef, isCarousel]);
 
 	return (
-		<section className='bg-white py-20'>
-			<div className='max-w-6xl mx-auto px-6'>
+		<section className='bg-white py-16 sm:py-20'>
+			<div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
 				<div className='text-center mb-12'>
-					<h2 className='text-4xl font-bold text-gray-900 mb-2'>
+					<h2 className='text-3xl sm:text-4xl font-bold text-gray-900 mb-3'>
 						Client Testimonials
 					</h2>
-					<p className='text-lg text-gray-600'>
-						Hear what our clients have to say about working with us.
+					<p className='text-lg text-gray-600 max-w-2xl mx-auto'>
+						Hear what our clients have to say about working with us
 					</p>
 				</div>
 
 				{isCarousel ? (
-					<div className='relative' ref={containerRef}>
-						<div ref={sliderRef} className='keen-slider py-8'>
+					<div className='relative'>
+						<div ref={sliderRef} className='keen-slider py-4'>
 							{testimonials.map((testimonial, index) => (
-								<div
-									key={index}
-									className='keen-slider__slide testimonial-card bg-white rounded-xl shadow-md p-8 flex flex-col justify-between'
-									style={{ minHeight: `${maxHeight}px` }}
-								>
-									<div className='absolute top-6 right-6 flex'>
-										{[...Array(5)].map((_, i) => (
-											<span key={i} className='text-yellow-400 text-lg ml-0.5'>
-												★
-											</span>
-										))}
-									</div>
-									<FaQuoteLeft className='text-red-100 text-3xl mb-4' />
-									<p className='text-left italic text-gray-700 leading-relaxed mb-6'>
-										“{testimonial.text}”
-									</p>
-									<div className='flex items-center gap-4 mt-auto'>
-										<div className='w-12 h-12 rounded-full overflow-hidden'>
-											<Image
-												src={testimonial.image}
-												alt={testimonial.name}
-												width={48}
-												height={48}
-												className='w-full h-full object-cover'
-											/>
-										</div>
-										<div>
-											<div className='font-semibold text-gray-900'>
-												{testimonial.name}
-											</div>
-											<div className='text-sm text-gray-500'>
-												{testimonial.location}
-											</div>
-										</div>
-									</div>
+								<div key={index} className='keen-slider__slide h-auto px-2'>
+									<TestimonialCard testimonial={testimonial} />
 								</div>
 							))}
 						</div>
-						<div className='flex justify-center gap-4 mt-8'>
+
+						<div className='flex justify-center gap-4 mt-10'>
 							<button
 								onClick={() => instanceRef.current?.prev()}
-								className='bg-[#E63946] hover:bg-[#c82e3b] text-white p-2 rounded-full shadow transition'
+								aria-label='Previous testimonial'
+								className='bg-[#E63946] hover:bg-[#c82e3b] text-white p-3 rounded-full shadow-md hover:shadow-lg transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[#E63946] focus:ring-opacity-50'
 							>
-								<ChevronLeft size={24} />
+								<ChevronLeft size={28} />
 							</button>
 							<button
 								onClick={() => instanceRef.current?.next()}
-								className='bg-[#E63946] hover:bg-[#c82e3b] text-white p-2 rounded-full shadow transition'
+								aria-label='Next testimonial'
+								className='bg-[#E63946] hover:bg-[#c82e3b] text-white p-3 rounded-full shadow-md hover:shadow-lg transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[#E63946] focus:ring-opacity-50'
 							>
-								<ChevronRight size={24} />
+								<ChevronRight size={28} />
 							</button>
 						</div>
 					</div>
 				) : (
 					<div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6'>
 						{testimonials.map((testimonial, index) => (
-							<div
-								key={index}
-								className='testimonial-card bg-white rounded-xl shadow-md p-8 flex flex-col justify-between'
-								style={{ minHeight: `${maxHeight}px` }}
-							>
-								<div className='absolute top-6 right-6 flex'>
-									{[...Array(5)].map((_, i) => (
-										<span key={i} className='text-yellow-400 text-lg ml-0.5'>
-											★
-										</span>
-									))}
-								</div>
-								<FaQuoteLeft className='text-red-100 text-3xl mb-4' />
-								<p className='text-left italic text-gray-700 leading-relaxed mb-6'>
-									“{testimonial.text}”
-								</p>
-								<div className='flex items-center gap-4 mt-auto'>
-									<div className='w-12 h-12 rounded-full overflow-hidden'>
-										<Image
-											src={testimonial.image}
-											alt={testimonial.name}
-											width={48}
-											height={48}
-											className='w-full h-full object-cover'
-										/>
-									</div>
-									<div>
-										<div className='font-semibold text-gray-900'>
-											{testimonial.name}
-										</div>
-										<div className='text-sm text-gray-500'>
-											{testimonial.location}
-										</div>
-									</div>
-								</div>
-							</div>
+							<TestimonialCard key={index} testimonial={testimonial} />
 						))}
 					</div>
 				)}

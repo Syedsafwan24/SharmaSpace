@@ -9,6 +9,7 @@ import Portfolio from '@/components/PortfolioSection';
 import Testimonials from '@/components/Testimonials';
 import Blog from '@/components/BlogSection';
 import Footer from '@/components/Footer';
+import TransformSpaceHero from '@/components/Transform';
 
 export default function Home() {
 	return (
@@ -23,7 +24,7 @@ export default function Home() {
 				<DesignInsights />
 				<Portfolio />
 				<Testimonials />
-				{/* <Blog /> */}
+				<TransformSpaceHero />
 			</main>
 			<Footer />
 		</div>

@@ -3,21 +3,21 @@ import React, { useEffect, useRef } from 'react';
 import Image from 'next/image';
 
 const AboutSection = () => {
-	const sectionRef = useRef(null);
-	const statsRef = useRef(null);
-	const imageRef = useRef(null);
+  const sectionRef = useRef(null);
+  const statsRef = useRef(null);
+  const imageRef = useRef(null);
 
-	useEffect(() => {
-		const observer = new IntersectionObserver(
-			(entries) => {
-				entries.forEach((entry) => {
-					if (entry.isIntersecting) {
-						entry.target.classList.add('opacity-100', 'translate-y-0');
-					}
-				});
-			},
-			{ threshold: 0.1 }
-		);
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("opacity-100", "translate-y-0");
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
 
 		const elements = [sectionRef.current, statsRef.current, imageRef.current];
 		elements.forEach((el) => {
@@ -33,8 +33,8 @@ const AboutSection = () => {
 			}
 		});
 
-		return () => observer.disconnect();
-	}, []);
+    return () => observer.disconnect();
+  }, []);
 
 	return (
 		<div className='bg-gray-50'>

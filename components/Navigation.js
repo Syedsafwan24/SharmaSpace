@@ -40,7 +40,7 @@ const Navigation = () => {
 				{/* Logo */}
 				<div className='flex items-center gap-2 transition-transform duration-300 hover:scale-105 cursor-pointer'>
 					<img
-						src='/images/icon/SharmaSpace-Logo.png'
+						src='/images/icon/SharmaSpace-Logo.webp'
 						alt='SharmaSpace Logo'
 						className='w-8 h-8 rounded'
 					/>

@@ -1,0 +1,132 @@
+/* ───────────────────────────
+   Global colour variables
+   ─────────────────────────── */
+   :root {
+    --soft-white: #F8F9FA;
+    --accent-red: #E63946;
+    --secondary: #1C1C1C;
+    --highlight: #EDEDED;
+    --cta: #D62828;
+  }
+  
+  /* ───────── Section Wrapper ───────── */
+  .about-section {
+    background: var(--soft-white);
+    padding: 120px 0;
+    position: relative;
+    overflow: hidden;
+    color: var(--secondary);
+  }
+  
+  /* ───────── Inner Grid Container ───────── */
+  .about-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+  
+  @media (max-width: 960px) {
+    .about-container {
+      grid-template-columns: 1fr;
+      gap: 56px;
+    }
+  }
+  
+  /* ───────── Reveal Animation Classes ───────── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+  }
+  
+  .visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  /* ───────── Typography ───────── */
+  .about-heading {
+    font-size: 2.5rem;
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--secondary);
+    margin-bottom: 32px;
+  }
+  
+  .about-paragraph {
+    font-size: 1.125rem;
+    line-height: 1.7;
+    color: #4A4A4A;
+    margin-bottom: 24px;
+  }
+  
+  .about-paragraph:last-of-type {
+    margin-bottom: 48px;
+  }
+  
+  /* ───────── Stats Grid ───────── */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+  }
+  
+  .stat-number {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--accent-red);
+    margin-bottom: 8px;
+    line-height: 1;
+  }
+  
+  .stat-label {
+    font-size: 1rem;
+    font-weight: 400;
+    color: #666666;
+    line-height: 1.4;
+  }
+  
+  /* ───────── Image Styles ───────── */
+  .about-image-wrapper {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  
+  .about-image {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+    transition: transform 0.3s ease;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+  }
+  
+  .about-image:hover {
+    transform: scale(1.02);
+  }
+  
+  /* Accessibility improvements */
+  .about-heading:focus,
+  .stat-number:focus {
+    outline: 2px solid var(--accent-red);
+    outline-offset: 4px;
+  }
+  
+  /* Reduced motion preference */
+  @media (prefers-reduced-motion: reduce) {
+    .reveal {
+      transition: none;
+      opacity: 1;
+      transform: none;
+    }
+    
+    .about-image:hover {
+      transform: none;
+    }
+  }

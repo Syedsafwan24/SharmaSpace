@@ -1,0 +1,124 @@
+import { Inter } from "next/font/google";
+import "./globals.css";
+import { Toaster } from "@/components/ui/toaster";
+import { Toaster as Sonner } from "@/components/ui/sonner";
+import { TooltipProvider } from "@/components/ui/tooltip";
+import { QueryProvider } from "@/components/providers/query-provider";
+
+const inter = Inter({ subsets: ["latin"] });
+
+export const metadata = {
+  title: {
+    default: "Interior Designers in Bangalore | Free 3D Consultation - Sharma Space",
+    template: "%s | Sharma Space"
+  },
+  description: "Transform your space with Bangalore's leading interior designers. Custom residential & commercial design solutions. Book free consultation today!",
+  keywords: [
+    "interior designers bangalore",
+    "interior design",
+    "home interior design",
+    "office interior design",
+    "modular kitchen",
+    "wardrobe design",
+    "residential interior",
+    "commercial interior"
+  ],
+  authors: [{ name: "Sharma Space" }],
+  creator: "Sharma Space",
+  publisher: "Sharma Space",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  metadataBase: new URL("https://sharmaspace.com"),
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    title: "Interior Designers in Bangalore | Free 3D Consultation - Sharma Space",
+    description: "Transform your space with Bangalore's leading interior designers. Custom residential & commercial design solutions. Book free consultation today!",
+    url: "https://sharmaspace.com",
+    siteName: "Sharma Space",
+    images: [
+      {
+        url: "/images/Hero-Background.webp",
+        width: 1200,
+        height: 630,
+        alt: "Sharma Space Interior Design",
+      },
+    ],
+    locale: "en_IN",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Interior Designers in Bangalore | Free 3D Consultation - Sharma Space",
+    description: "Transform your space with Bangalore's leading interior designers. Custom residential & commercial design solutions. Book free consultation today!",
+    images: ["/images/Hero-Background.webp"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+};
+
+export default function RootLayout({ children }) {
+  return (
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "LocalBusiness",
+              "@id": "https://sharmaspace.com",
+              name: "Sharma Space",
+              description: "Interior design studio specializing in functional, personalized spaces blending aesthetics with practicality.",
+              address: {
+                "@type": "PostalAddress",
+                streetAddress: "123 Design Avenue",
+                addressLocality: "Mumbai",
+                addressRegion: "Maharashtra",
+                postalCode: "400001",
+                addressCountry: "IN"
+              },
+              telephone: "+91 98765 43210",
+              email: "info@sharmaspace.com",
+              url: "https://sharmaspace.com",
+              openingHoursSpecification: {
+                "@type": "OpeningHoursSpecification",
+                dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+                opens: "10:00",
+                closes: "19:00"
+              },
+              areaServed: ["Bangalore", "Whitefield", "Indiranagar", "Koramangala", "HSR Layout"],
+              geo: {
+                "@type": "GeoCoordinates",
+                latitude: "12.9716",
+                longitude: "77.5946"
+              }
+            })
+          }}
+        />
+      </head>
+      <body className={inter.className}>
+        <QueryProvider>
+          <TooltipProvider>
+            {children}
+            <Toaster />
+            <Sonner />
+          </TooltipProvider>
+        </QueryProvider>
+      </body>
+    </html>
+  );
+}

@@ -7,7 +7,7 @@ const articles = [
     image: '/images/Desgin-Insights/home-interior-decor-trends-2024.jpg',
     title: '5 Trends in Modern Interior Design for 2024',
     summary: 'Discover the latest trends shaping modern interior spaces, from sustainable materials to...',
-    author: { name: 'Nisha Sharma', avatar: '/images/author1.jpg' },
+    author: { name: 'Nisha Sharma', avatar: '/images/Desgin-Insights/10.webp' },
     date: 'May 15, 2024',
   },
   {
@@ -15,7 +15,7 @@ const articles = [
     image: '/images/Desgin-Insights/How_To_Choose_The_Perfect_Colour_Palette_For_Your_Home.png',
     title: 'How to Choose the Right Color Palette for Your Home',
     summary: 'Expert tips on selecting colors that create harmony, reflect your personality, and enhance...',
-    author: { name: 'Vikram Patel', avatar: '/images/author2.jpg' },
+    author: { name: 'Vikram Patel', avatar: '/images/Desgin-Insights/istockphoto-1386479313-612x612.jpg' },
     date: 'April 28, 2024',
   },
   {
@@ -23,7 +23,7 @@ const articles = [
     image: '/images/Desgin-Insights/Maximizing-Small-Spaces-Tips-from-the-Experts.webp',
     title: 'Maximizing Small Spaces: Tips from the Experts',
     summary: 'Learn clever design solutions to make the most of compact living areas without sacrificing sty...',
-    author: { name: 'Meera Kapoor', avatar: '/images/author3.jpg' },
+    author: { name: 'Meera Kapoor', avatar: '/images/Desgin-Insights/E12KS1G65-W0168RE00G7-133faf432639-512.jpeg' },
     date: 'April 10, 2024',
   },
 ];

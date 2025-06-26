@@ -47,13 +47,13 @@ const Process = () => {
 
             {/* Center circle */}
             <div className="absolute left-1/2 transform -translate-x-1/2 z-20">
-              <div className="w-20 h-20 bg-red-600 rounded-full flex items-center justify-center text-white text-xl font-bold border-4 border-white shadow-lg">
-                {step.number}
-              </div>
-              {/* Icon circle */}
-              <div className={`absolute ${index % 2 === 0 ? '-top-2 -right-2' : '-bottom-2 -left-2'} w-10 h-10 bg-white border-2 border-red-600 rounded-full flex items-center justify-center text-red-600 text-lg`}>
+              <div className="w-20 h-20 bg-white rounded-full flex items-center justify-center text-white text-xl font-bold border-4 border-white shadow-lg">
                 {step.icon}
               </div>
+              {/* Icon circle */}
+              {/* <div className={`absolute ${index % 2 === 0 ? '-top-2 -right-2' : '-bottom-2 -left-2'} w-10 h-10 bg-white border-2 border-red-600 rounded-full flex items-center justify-center text-red-600 text-lg`}>
+                {step.number}
+              </div> */}
             </div>
 
             {/* Right decorative element for odd steps, left for even */}

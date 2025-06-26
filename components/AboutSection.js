@@ -76,7 +76,7 @@ const AboutSection = () => {
             <div ref={imageRef} className="relative">
               <div className="relative rounded-2xl overflow-hidden shadow-2xl transition-transform duration-500 hover:-translate-y-2 hover:scale-105">
                 <Image
-                  src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                  src="/images/AboutSection.webp"
                   alt="Modern orange sofa with decorative pillows in contemporary living room - Sharma Space interior design showcase"
                   width={800}
                   height={600}

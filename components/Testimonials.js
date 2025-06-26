@@ -1,103 +1,215 @@
-"use client";
+'use client';
 
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
+import { useKeenSlider } from 'keen-slider/react';
+import 'keen-slider/keen-slider.min.css';
 import Image from 'next/image';
+import { FaQuoteLeft } from 'react-icons/fa';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 const Testimonials = () => {
-  const sectionRef = useRef(null);
+	const testimonials = [
+		{
+			text: `Sharma Space transformed our home into a dream! Their attention to detail is unmatched. Every corner now reflects our personality while maintaining functionality.`,
+			name: 'Priya S.',
+			location: 'Mumbai',
+			image:
+				'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80',
+		},
+		{
+			text: `They created a workspace that inspires creativity. The team understood our needs perfectly.`,
+			name: 'Rahul M.',
+			location: 'Delhi',
+			image:
+				'https://images.unsplash.com/photo-1494790108755-2616b612b977?auto=format&fit=crop&w=100&q=80',
+		},
+		{
+			text: `Delivered within budget, exceeded expectations with final result.`,
+			name: 'Ananya K.',
+			location: 'Bangalore',
+			image:
+				'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80',
+		},
+		{
+			text: `Exceptional service from start to finish. Highly recommend Sharma Space.`,
+			name: 'Vikram P.',
+			location: 'Hyderabad',
+			image:
+				'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=100&q=80',
+		},
+		{
+			text: `Our guests love the new look. Elegant, modern, and inviting.`,
+			name: 'Deepika R.',
+			location: 'Chennai',
+			image:
+				'https://images.unsplash.com/photo-1571508601792-53c25e4fe732?auto=format&fit=crop&w=800&q=80',
+		},
+	];
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('opacity-100', 'translate-y-0');
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
+	const isCarousel = testimonials.length > 3;
 
-    if (sectionRef.current) {
-      sectionRef.current.classList.add('opacity-0', 'translate-y-8', 'transition-all', 'duration-700', 'ease-out');
-      observer.observe(sectionRef.current);
-    }
+	const containerRef = useRef(null);
+	const [maxHeight, setMaxHeight] = useState(0);
 
-    return () => observer.disconnect();
-  }, []);
+	useEffect(() => {
+		if (containerRef.current) {
+			const cardEls =
+				containerRef.current.querySelectorAll('.testimonial-card');
+			let max = 0;
+			cardEls.forEach((el) => {
+				max = Math.max(max, el.offsetHeight);
+			});
+			setMaxHeight(max);
+		}
+	}, []);
 
-  const testimonials = [
-    {
-      text: "Exceptional service from concept to completion. The designers at Sharma Space have an incredible eye for detail and truly understood our vision for our home.",
-      name: "Vikram P.",
-      location: "Hyderabad",
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80",
-    },
-    {
-      text: "Our hotel renovation was handled with utmost care and creativity. The result has been praised by all our guests, driving up our bookings significantly.",
-      name: "Deepika R.",
-      location: "Chennai",
-      image: "https://images.unsplash.com/photo-1494790108755-2616b612b977?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80",
-    },
-  ];
+	const [sliderRef, instanceRef] = useKeenSlider({
+		loop: true,
+		slides: {
+			perView: 3,
+			spacing: 24,
+		},
+		breakpoints: {
+			'(max-width: 1024px)': {
+				slides: {
+					perView: 2,
+					spacing: 20,
+				},
+			},
+			'(max-width: 640px)': {
+				slides: {
+					perView: 1,
+					spacing: 16,
+				},
+			},
+		},
+	});
 
-  return (
-    <section className="bg-gray-50 py-20 lg:py-30">
-      <div ref={sectionRef} className="max-w-6xl mx-auto px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-15 mb-30">
-          {testimonials.map((testimonial, index) => (
-            <div
-              key={index}
-              className="bg-white rounded-xl p-10 shadow-lg relative transition-transform duration-300 hover:-translate-y-1 group"
-            >
-              {/* Large decorative quote */}
-              <div className="text-8xl text-red-50 absolute -top-2 left-8 leading-none font-serif">
-                "
-              </div>
-              
-              <div className="flex mb-5 mt-5">
-                {[...Array(5)].map((_, i) => (
-                  <span key={i} className="text-yellow-400 text-lg mr-0.5">★</span>
-                ))}
-              </div>
-              
-              <p className="text-lg leading-relaxed text-gray-600 italic mb-8 relative z-10">
-                {testimonial.text}
-              </p>
-              
-              <div className="flex items-center gap-4">
-                <Image
-                  src={testimonial.image}
-                  alt={`${testimonial.name} - Client testimonial`}
-                  width={60}
-                  height={60}
-                  className="rounded-full object-cover"
-                />
-                <div>
-                  <div className="text-lg font-semibold text-gray-900 mb-1">
-                    {testimonial.name}
-                  </div>
-                  <div className="text-base text-gray-500">
-                    {testimonial.location}
-                  </div>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
+	// Autoplay
+	useEffect(() => {
+		let interval;
+		if (instanceRef.current && isCarousel) {
+			interval = setInterval(() => {
+				instanceRef.current.next();
+			}, 4000);
+		}
+		return () => clearInterval(interval);
+	}, [instanceRef, isCarousel]);
 
-        {/* Partner Brands Section */}
-        <div className="text-center">
-          <h3 className="text-4xl font-bold text-gray-900 mb-4">
-            Our Partner Brands
-          </h3>
-          <p className="text-lg text-gray-500 mb-15 max-w-2xl mx-auto">
-            We collaborate with premium brands to ensure quality and excellence in every project.
-          </p>
-        </div>
-      </div>
-    </section>
-  );
+	return (
+		<section className='bg-white py-20'>
+			<div className='max-w-6xl mx-auto px-6'>
+				<div className='text-center mb-12'>
+					<h2 className='text-4xl font-bold text-gray-900 mb-2'>
+						Client Testimonials
+					</h2>
+					<p className='text-lg text-gray-600'>
+						Hear what our clients have to say about working with us.
+					</p>
+				</div>
+
+				{isCarousel ? (
+					<div className='relative' ref={containerRef}>
+						<div ref={sliderRef} className='keen-slider py-8'>
+							{testimonials.map((testimonial, index) => (
+								<div
+									key={index}
+									className='keen-slider__slide testimonial-card bg-white rounded-xl shadow-md p-8 flex flex-col justify-between'
+									style={{ minHeight: `${maxHeight}px` }}
+								>
+									<div className='absolute top-6 right-6 flex'>
+										{[...Array(5)].map((_, i) => (
+											<span key={i} className='text-yellow-400 text-lg ml-0.5'>
+												★
+											</span>
+										))}
+									</div>
+									<FaQuoteLeft className='text-red-100 text-3xl mb-4' />
+									<p className='text-left italic text-gray-700 leading-relaxed mb-6'>
+										“{testimonial.text}”
+									</p>
+									<div className='flex items-center gap-4 mt-auto'>
+										<div className='w-12 h-12 rounded-full overflow-hidden'>
+											<Image
+												src={testimonial.image}
+												alt={testimonial.name}
+												width={48}
+												height={48}
+												className='w-full h-full object-cover'
+											/>
+										</div>
+										<div>
+											<div className='font-semibold text-gray-900'>
+												{testimonial.name}
+											</div>
+											<div className='text-sm text-gray-500'>
+												{testimonial.location}
+											</div>
+										</div>
+									</div>
+								</div>
+							))}
+						</div>
+						<div className='flex justify-center gap-4 mt-8'>
+							<button
+								onClick={() => instanceRef.current?.prev()}
+								className='bg-[#E63946] hover:bg-[#c82e3b] text-white p-2 rounded-full shadow transition'
+							>
+								<ChevronLeft size={24} />
+							</button>
+							<button
+								onClick={() => instanceRef.current?.next()}
+								className='bg-[#E63946] hover:bg-[#c82e3b] text-white p-2 rounded-full shadow transition'
+							>
+								<ChevronRight size={24} />
+							</button>
+						</div>
+					</div>
+				) : (
+					<div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6'>
+						{testimonials.map((testimonial, index) => (
+							<div
+								key={index}
+								className='testimonial-card bg-white rounded-xl shadow-md p-8 flex flex-col justify-between'
+								style={{ minHeight: `${maxHeight}px` }}
+							>
+								<div className='absolute top-6 right-6 flex'>
+									{[...Array(5)].map((_, i) => (
+										<span key={i} className='text-yellow-400 text-lg ml-0.5'>
+											★
+										</span>
+									))}
+								</div>
+								<FaQuoteLeft className='text-red-100 text-3xl mb-4' />
+								<p className='text-left italic text-gray-700 leading-relaxed mb-6'>
+									“{testimonial.text}”
+								</p>
+								<div className='flex items-center gap-4 mt-auto'>
+									<div className='w-12 h-12 rounded-full overflow-hidden'>
+										<Image
+											src={testimonial.image}
+											alt={testimonial.name}
+											width={48}
+											height={48}
+											className='w-full h-full object-cover'
+										/>
+									</div>
+									<div>
+										<div className='font-semibold text-gray-900'>
+											{testimonial.name}
+										</div>
+										<div className='text-sm text-gray-500'>
+											{testimonial.location}
+										</div>
+									</div>
+								</div>
+							</div>
+						))}
+					</div>
+				)}
+			</div>
+		</section>
+	);
 };
 
 export default Testimonials;

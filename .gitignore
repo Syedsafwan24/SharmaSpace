@@ -49,3 +49,5 @@ playwright-report/
 *.swp
 *.swo
 *.bak
+
+/lib/generated/prisma

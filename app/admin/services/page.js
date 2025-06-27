@@ -96,7 +96,7 @@ export default function AdminServicesPage() {
       <div className="flex flex-1">
         <Sidebar />
         <div className="flex-1 p-4 lg:p-8 pt-20 lg:pt-8 pb-20 lg:pb-8">
-          <ServiceHeader />
+          <ServiceHeader onAddServiceClick={handleAddService} />
           <ServiceSearchFilter
             searchQuery={searchQuery}
             setSearchQuery={setSearchQuery}

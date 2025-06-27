@@ -1,15 +1,36 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Sofa, Building, Hotel, LayoutGrid, Chair, Hammer } from 'lucide-react';
+import {
+  Sofa,
+  Bed,
+  Armchair,
+  Home,
+  Building,
+  Palette,
+  Lightbulb,
+  Ruler,
+  PenTool,
+  Building2,
+  Hammer,
+  Paintbrush,
+  Hotel,
+  LayoutGrid
+} from 'lucide-react';
 
 const iconOptions = [
-  { value: 'Sofa', label: 'Sofa', icon: Sofa },
+  { value: 'Sofa', label: 'Couch', icon: Sofa },
+  { value: 'Bed', label: 'Bed', icon: Bed },
+  { value: 'Armchair', label: 'Chair', icon: Armchair },
+  { value: 'Home', label: 'Home', icon: Home },
   { value: 'Building', label: 'Building', icon: Building },
-  { value: 'Hotel', label: 'Hotel', icon: Hotel },
-  { value: 'LayoutGrid', label: 'Layout Grid', icon: LayoutGrid },
-  { value: 'Chair', label: 'Chair', icon: Chair },
-  { value: 'Hammer', label: 'Hammer', icon: Hammer },
+  { value: 'Palette', label: 'Design/Palette', icon: Palette },
+  { value: 'Lightbulb', label: 'Idea', icon: Lightbulb },
+  { value: 'Ruler', label: 'Measurements', icon: Ruler },
+  { value: 'PenTool', label: 'Design Tool', icon: PenTool },
+  { value: 'Building2', label: 'Architecture', icon: Building2 },
+  { value: 'Hammer', label: 'Construction', icon: Hammer },
+  { value: 'Paintbrush', label: 'Painting', icon: Paintbrush },
 ];
 
 const EditServiceForm = ({ service, onClose }) => {
@@ -28,7 +49,6 @@ const EditServiceForm = ({ service, onClose }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(isEditMode ? 'Form submitted for edit:' : 'Form submitted for add:', formData);
-    // Here you would typically send data to your backend
     onClose();
   };
 
@@ -62,21 +82,27 @@ const EditServiceForm = ({ service, onClose }) => {
         </div>
 
         <div className="mb-6">
-          <label htmlFor="icon" className="block text-gray-700 text-sm font-bold mb-2">Icon</label>
-          <select
-            id="icon"
-            name="icon"
-            value={formData.icon}
-            onChange={handleChange}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#E63946] text-[#1C1C1C]"
-          >
-            <option value="">Select an icon</option>
-            {iconOptions.map((option) => (
-              <option key={option.value} value={option.value}>
-                {option.label}
-              </option>
-            ))}
-          </select>
+          <label className="block text-gray-700 text-sm font-bold mb-2">Icon</label>
+          <div className="grid grid-cols-3 gap-2">
+            {iconOptions.map((option) => {
+              const IconComponent = option.icon;
+              return (
+                <button
+                  key={option.value}
+                  type="button"
+                  onClick={() => setFormData((prev) => ({ ...prev, icon: option.value }))}
+                  className={`flex flex-col items-center justify-center p-3 rounded-md transition-colors duration-200 ${
+                    formData.icon === option.value
+                      ? 'bg-[#E63946] text-white shadow-sm'
+                      : 'bg-[#EDEDED] text-gray-700 hover:bg-gray-200'
+                  }`}
+                >
+                  <IconComponent size={24} />
+                  <span className="text-xs mt-1">{option.label}</span>
+                </button>
+              );
+            })}
+          </div>
         </div>
 
         <div className="flex justify-end gap-4">

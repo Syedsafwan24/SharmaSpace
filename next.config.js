@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ['images.unsplash.com', 'lovable.dev'],
+    
     remotePatterns: [
       {
         protocol: 'https',
@@ -17,9 +17,7 @@ const nextConfig = {
       },
     ],
   },
-  experimental: {
-    optimizePackageImports: ['lucide-react'],
-  },
+  transpilePackages: ['lucide-react'],
 }
 
 module.exports = nextConfig

@@ -20,6 +20,13 @@ const Navigation = () => {
 		{ name: 'Contact', path: '/contact' },
 	];
 
+	// Check if we're on a light background page
+	const isLightPage =
+		pathname.includes('/blog/') || pathname.includes('/portfolio/');
+
+	// Should use dark theme when scrolled OR on light pages
+	const useDarkTheme = isScrolled || isLightPage;
+
 	useEffect(() => {
 		const handleScroll = () => {
 			const scrollTop = window.scrollY;
@@ -43,7 +50,6 @@ const Navigation = () => {
 			document.body.style.overflow = 'unset';
 		}
 
-		// Cleanup on unmount
 		return () => {
 			document.body.style.overflow = 'unset';
 		};
@@ -53,47 +59,53 @@ const Navigation = () => {
 		setIsMobileMenuOpen(!isMobileMenuOpen);
 	};
 
+	// Debug (remove after testing)
+	console.log('Debug:', { pathname, isLightPage, useDarkTheme, isScrolled });
+
 	return (
 		<>
 			<nav
 				className={`fixed top-0 left-0 right-0 py-3 z-50 transition-all duration-500 ease-in-out ${
-					isScrolled
+					useDarkTheme
 						? 'bg-white backdrop-blur-md border-gray-200/30 shadow-sm'
 						: 'bg-transparent'
 				}`}
 			>
 				<div className='max-w-6xl mx-auto px-4 sm:px-6 flex justify-between items-center'>
 					{/* Logo */}
-					<div className='flex items-center gap-2 transition-transform duration-300 hover:scale-105 cursor-pointer'>
+					{/* Added Link component around the logo and text */}
+					<Link
+						href='/'
+						className='flex items-center gap-2 transition-transform duration-300 hover:scale-105 cursor-pointer'
+					>
 						<img
 							src='/images/icon/SharmaSpace-Logo.png'
 							alt='SharmaSpace Logo'
 							className='w-8 h-8 sm:w-10 sm:h-10 rounded'
 						/>
 						<span
-							className={`text-lg sm:text-xl font-bold ${
-								isScrolled ? 'text-gray-900' : 'text-white'
-							}`}
+							className='text-lg sm:text-xl font-bold'
+							style={{ color: useDarkTheme ? '#1f2937' : '#ffffff' }}
 						>
 							Sharma Space
 						</span>
-					</div>
+					</Link>
 
 					{/* Desktop Navigation */}
 					<ul className='hidden lg:flex list-none m-0 p-0 gap-6 xl:gap-8'>
 						{navItems.map((item) => (
 							<li key={item.name}>
 								<Link href={item.path}>
+									{/* Adjusted styles for hover effect */}
 									<span
-										className={`${
-											isScrolled
-												? pathname === item.path
-													? 'text-red-600'
-													: 'text-gray-900 hover:text-red-600'
-												: pathname === item.path
-												? 'text-red-600'
-												: 'text-white hover:text-red-600'
-										} no-underline font-medium transition-all duration-300 text-base relative hover:-translate-y-0.5 bg-transparent border-none cursor-pointer`}
+										className={`no-underline font-medium transition-all duration-300 text-base relative hover:-translate-y-0.5 cursor-pointer
+											${pathname === item.path ? 'text-red-600' : ''}
+											${
+												useDarkTheme
+													? 'text-gray-700 hover:text-red-600'
+													: 'text-white hover:text-red-600'
+											}
+										`}
 									>
 										{item.name}
 									</span>
@@ -113,11 +125,8 @@ const Navigation = () => {
 							<Link key={index} href={href}>
 								<Icon
 									size={20}
-									className={`transition-all duration-300 p-1 hover:scale-110 cursor-pointer ${
-										isScrolled
-											? 'text-gray-900 hover:text-red-600'
-											: 'text-white hover:text-red-600'
-									}`}
+									className='transition-all duration-300 p-1 hover:scale-110 cursor-pointer'
+									style={{ color: useDarkTheme ? '#1f2937' : '#ffffff' }}
 								/>
 							</Link>
 						))}
@@ -126,11 +135,11 @@ const Navigation = () => {
 					{/* Mobile Menu Button */}
 					<button
 						onClick={toggleMobileMenu}
-						className={`lg:hidden p-2 rounded-md transition-colors duration-300 ${
-							isScrolled
-								? 'text-gray-900 hover:bg-gray-100'
-								: 'text-white hover:bg-white/10'
-						}`}
+						className='lg:hidden p-2 rounded-md transition-colors duration-300'
+						style={{
+							color: useDarkTheme ? '#1f2937' : '#ffffff',
+							backgroundColor: 'transparent',
+						}}
 						aria-label='Toggle mobile menu'
 					>
 						{isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}

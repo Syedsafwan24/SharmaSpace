@@ -1,0 +1,42 @@
+export const testimonialsData = [
+  {
+    id: 1,
+    name: 'Priya S.',
+    location: 'Mumbai',
+    rating: 5,
+    image: '/images/testimonials/priya.jpg',
+    text: 'Sharma Space transformed our home into a dream! Their attention to detail is unmatched. Every corner of our apartment now reflects our personality while maintaining functionality.',
+  },
+  {
+    id: 2,
+    name: 'Rahul M.',
+    location: 'Delhi',
+    rating: 5,
+    image: '/images/testimonials/rahul.jpg',
+    text: 'Working with Sharma Space for our office redesign was the best decision. Their team understood our brand and created a workspace that inspires creativity and collaboration.',
+  },
+  {
+    id: 3,
+    name: 'Ananya K.',
+    location: 'Bangalore',
+    rating: 5,
+    image: '/images/testimonials/ananya.jpg',
+    text:"The team's professionalism and expertise made our renovation stress-free. They delivered on time and within budget, exceeding our expectations with the final result.",
+  },
+  {
+    id: 4,
+    name: 'Vikram P.',
+    location: 'Hyderabad',
+    rating: 5,
+    image: '/images/testimonials/vikram.jpg',
+    text: 'Exceptional service from concept to completion. The designers at Sharma Space have an incredible eye for detail and truly understood our vision for our home.',
+  },
+  {
+    id: 5,
+    name: 'Deepika R.',
+    location: 'Chennai',
+    rating: 5,
+    image: '/images/testimonials/deepika.jpg',
+    text: 'Our hotel renovation was handled with utmost care and creativity. The result has been praised by all our guests, driving up our bookings significantly.',
+  },
+];

@@ -4,41 +4,41 @@ This plan outlines the steps to create a pixel-perfect recreation of the provide
 
 ### Phase 1: Setup and Layout
 
-- [ ] **Update `app/admin/dashboard/page.js`:**
+- [x] **Update `app/admin/dashboard/page.js`:**
     - Set up the main dashboard layout (sidebar and main content area).
     - Integrate new components into this layout.
 
-- [ ] **Create `components/admin/Sidebar.js`:**
+- [x] **Create `components/admin/Sidebar.js`:**
     - Implement the navigation sidebar with links for Dashboard, Projects, Services, Blog Posts, Testimonials, and Messages.
     - Include the "Sharma Space" logo and "Admin Panel" text.
     - Add the "Back to Website" link at the bottom.
     - Use appropriate Lucide React icons for each menu item.
 
-- [ ] **Create `components/admin/DashboardHeader.js`:**
+- [x] **Create `components/admin/DashboardHeader.js`:**
     - Implement the "Dashboard" title and "Overview of your website content and analytics" subtitle.
 
 ### Phase 2: Dashboard Widgets
 
-- [ ] **Create `components/admin/StatsCard.js`:**
+- [x] **Create `components/admin/StatsCard.js`:**
     - Design a reusable card component for displaying statistics (Total Projects, Total Services, Testimonials, Messages, Blog Posts).
     - Ensure it matches the reference image's layout, typography, and colors.
     - Use appropriate Lucide React icons.
 
-- [ ] **Create `components/admin/RecentMessages.js`:**
+- [x] **Create `components/admin/RecentMessages.js`:**
     - Implement the "Recent Messages" section, displaying sender, timestamp, and message snippet.
     - Match the typography, spacing, and card design.
 
-- [ ] **Create `components/admin/ProjectCategories.js`:**
+- [x] **Create `components/admin/ProjectCategories.js`:**
     - Implement the "Project Categories" section with progress bars.
     - Match the bar colors, percentages, and typography.
 
-- [ ] **Create `components/admin/RecentProjects.js`:**
+- [x] **Create `components/admin/RecentProjects.js`:**
     - Implement the "Recent Projects" section with project images, titles, and categories.
     - Match the layout, image sizes, and typography.
 
 ### Phase 3: Styling and Refinement
 
-- [ ] **Apply Global Styling and Refinements:**
+- [x] **Apply Global Styling and Refinements:**
     - Ensure all components strictly adhere to the provided color palette:
         - Primary: Soft White (#F8F9FA)
         - Accent: Red (#E63946)
@@ -47,6 +47,37 @@ This plan outlines the steps to create a pixel-perfect recreation of the provide
         - CTA: Deep Red (#D62828)
     - Maintain identical proportions, spacing, alignment, line weights, and shadows as shown in the reference image.
     - Use placeholder data for all dynamic content.
+
+### Phase 4: Projects Page Implementation
+
+- [x] **Create `app/admin/projects/page.js`:** Set up the main page structure, including the sidebar and top navbar (for responsiveness).
+- [x] **Create `components/admin/projects/ProjectHeader.js`:** Implement the page title, subtitle, and "Add New Project" button.
+- [x] **Create `components/admin/projects/ProjectSearchFilter.js`:** Implement the search input and category filter buttons.
+- [x] **Create `components/admin/projects/ProjectCard.js`:** Design a reusable component for each project entry, including image, details, and action buttons.
+- [x] **Integrate components**: Assemble these new components within `app/admin/projects/page.js`.
+- [x] **Apply pixel-perfect styling**: Ensure all elements match the reference image's proportions, colors, typography, and visual effects using the provided color palette.
+- [x] **Ensure responsiveness**: Make sure the layout adapts well to different screen sizes.
+- [x] **Make sure the filter are working**: Implement filtering logic for project categories and search query.
+
+### Phase 5: Edit Project Modal Implementation
+
+- [x] **Create `components/admin/projects/EditProjectModal.js`**: This will be the main modal wrapper, handling visibility and the close button.
+- [x] **Create `components/admin/projects/EditProjectForm.js`**: This component will contain all the input fields and logic for editing a project, including dynamic fields for images.
+- [x] **Create `components/admin/projects/ImageInput.js`**: A reusable sub-component for handling individual image URL inputs with previews.
+- [x] **Modify `components/admin/projects/ProjectCard.js`**: Add an "Edit" button that triggers the modal and passes project data.
+- [x] **Modify `app/admin/projects/page.js`**: Manage the modal's open/closed state and the selected project data.
+
+### Phase 6: Services Page Implementation
+
+- [x] **Create `app/admin/services/page.js`**: Set up the main page structure, including the sidebar and top navbar (for responsiveness).
+- [x] **Create `components/admin/services/ServiceHeader.js`**: Implement the page title, subtitle, and "Add New Service" button.
+- [x] **Create `components/admin/services/ServiceSearchFilter.js`**: Implement the search input.
+- [x] **Create `components/admin/services/ServiceCard.js`**: Design a reusable component for each service entry, including title, description, icon, and action buttons.
+- [x] **Create `components/admin/services/EditServiceModal.js`**: A modal for adding/editing services.
+- [x] **Create `components/admin/services/EditServiceForm.js`**: The form within the modal for service details.
+- [x] **Integrate components**: Assemble these new components within `app/admin/services/page.js`.
+- [x] **Apply pixel-perfect styling**: Ensure all elements match the reference image's proportions, colors, typography, and visual effects using the provided color palette.
+- [x] **Ensure responsiveness**: Make sure the layout adapts well to different screen sizes, including the floating "Add New Service" button for mobile.
 
 ### Review
 

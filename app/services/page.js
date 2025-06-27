@@ -1,26 +1,73 @@
-import Navigation from "@/components/Navigation";
-import Footer from "@/components/Footer";
+// app/services/page.js
+import Cta from '@/components/Cta';
+import Footer from '@/components/Footer';
+import Navigation from '@/components/Navigation';
+import AlternatingServices from '@/components/services/AlternatingServices';
+import DesignProcess from '@/components/services/DesignProcess';
+import HeroService from '@/components/services/HeroService';
+import ServicesSection from '@/components/services/ServicesSection';
 
 export const metadata = {
-  title: "Interior Design Services in Bangalore | Modular Kitchen & Wardrobe",
-  description: "Comprehensive interior design services in Bangalore: modular kitchens, wardrobes, residential & commercial design. Expert space planning and furniture selection.",
+	title:
+		'Premium Interior Design Services | Residential & Commercial Solutions',
+	description:
+		'Expert interior design services specializing in modular kitchens, wardrobes, and space planning for homes and offices.',
+	keywords: [
+		'interior design services',
+		'modular kitchen design',
+		'wardrobe design',
+		'residential interior design',
+		'commercial space design',
+		'space planning services',
+		'home renovation',
+	],
+	openGraph: {
+		title: 'Premium Interior Design Services',
+		description: 'Complete interior design solutions for homes and offices',
+		type: 'website',
+	},
+	twitter: {
+		card: 'summary_large_image',
+		title: 'Premium Interior Design Services',
+		description: 'Complete interior design solutions for homes and offices',
+	},
+	alternates: {
+		canonical: '/services',
+	},
 };
 
 export default function Services() {
-  return (
-    <div className="bg-gray-50">
-      <Navigation />
-      <main className="min-h-[60vh] py-20">
-        <div className="max-w-6xl mx-auto px-6 text-center">
-          <h1 className="text-4xl font-bold text-gray-900 mb-6">
-            Our Services
-          </h1>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Coming soon - Detailed information about our residential, commercial, and hospitality design services.
-          </p>
-        </div>
-      </main>
-      <Footer />
-    </div>
-  );
+	const jsonLd = {
+		'@context': 'https://schema.org',
+		'@type': 'ProfessionalService',
+		name: 'Sharma Space',
+		description: 'Professional interior design services',
+		serviceType: 'Interior design',
+		offers: {
+			'@type': 'Offer',
+			name: 'Interior Design Consultation',
+		},
+	};
+
+	return (
+		<>
+			<Navigation />
+			<HeroService />
+			{/* Structured data for services */}
+			<script
+				type='application/ld+json'
+				dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+			/>
+			<ServicesSection />
+			<AlternatingServices />
+			<DesignProcess />
+			<Cta
+				title='Ready to Start Your Design Journey?'
+				description='Contact us today to schedule a consultation and discuss how we can transform your space.'
+				buttonText='Contact Us'
+				buttonLink='/contact'
+			/>
+			<Footer />
+		</>
+	);
 }

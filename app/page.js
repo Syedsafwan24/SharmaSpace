@@ -5,7 +5,7 @@ import Footer from '@/components/Footer';
 import Hero from '@/components/Hero';
 import Navigation from '@/components/Navigation';
 import PartnerBrands from '@/components/PartnerBrands';
-import Portfolio from '@/components/portfolio/PortfolioSection';
+import Portfolio from '@/components/PortfolioSection';
 import Process from '@/components/Process';
 import Services from '@/components/services/Services';
 import Testimonials from '@/components/Testimonials';

@@ -1,4 +1,3 @@
-// app/data/portfolioData.js
 export const portfolioProjects = [
 	{
 		id: 1,
@@ -24,6 +23,7 @@ export const portfolioProjects = [
 			'https://images.unsplash.com/photo-1513519245088-0e12902e5a38?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
 			'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
 		],
+		videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ?si=0zWb_E_F0-lD-d0J', // Rick Roll for demonstration
 	},
 	{
 		id: 2,
@@ -48,6 +48,7 @@ export const portfolioProjects = [
 			'https://images.unsplash.com/photo-1524758631624-e2822e304c36?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
 			'https://images.unsplash.com/photo-1497366811353-6870744d04b2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
 		],
+		videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ?si=0zWb_E_F0-lD-d0J',
 	},
 	{
 		id: 3,
@@ -72,5 +73,31 @@ export const portfolioProjects = [
 			'https://images.unsplash.com/photo-1600566752355-35792bedcfea?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
 			'https://images.unsplash.com/photo-1600607688969-a5bfcd646154?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
 		],
+		videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ?si=0zWb_E_F0-lD-d0J',
+	},
+	{
+		id: 4,
+		title: 'Urban Loft Renovation',
+		description:
+			'A modern renovation of an urban loft, blending industrial aesthetics with comfortable living spaces.',
+		shortDescription: 'Industrial-style loft renovation in Pune',
+		image:
+			'https://images.unsplash.com/photo-1513519245088-0e12902e5a38?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+		coverImage:
+			'https://images.unsplash.com/photo-1513519245088-0e12902e5a38?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80',
+		slug: 'urban-loft-renovation',
+		category: 'Residential',
+		featured: false,
+		client: 'The Verma Residence',
+		location: 'Pune',
+		area: '1500 sq ft',
+		completedDate: '2022-08-01',
+		services: ['Renovation', 'Interior Styling', 'Space Optimization'],
+		galleryImages: [
+			'https://images.unsplash.com/photo-1513519245088-0e12902e5a38?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+			'https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+			'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+		],
+		videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ?si=0zWb_E_F0-lD-d0J',
 	},
 ];

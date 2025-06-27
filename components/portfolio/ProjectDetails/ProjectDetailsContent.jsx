@@ -1,51 +1,88 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
+import Link from 'next/link'; // Import Link component
 
 const ProjectDetailsContent = ({ project }) => {
-	const [selectedImageIndex, setSelectedImageIndex] = useState(0);
+	const [displayImage, setDisplayImage] = useState(
+		project.coverImage || project.image
+	);
+	const [activeThumbnailIndex, setActiveThumbnailIndex] = useState(-1);
+
+	useEffect(() => {
+		setDisplayImage(project.coverImage || project.image);
+		setActiveThumbnailIndex(-1);
+	}, [project]);
+
+	const handleThumbnailClick = (imageSrc, index) => {
+		setDisplayImage(imageSrc);
+		setActiveThumbnailIndex(index);
+	};
 
 	return (
 		<div className='grid grid-cols-1 lg:grid-cols-3 gap-12 mb-16'>
-			{/* Left Column - Images */}
+			{/* Left Column - Main Image and Thumbnails */}
 			<div className='lg:col-span-2'>
 				{/* Main Image */}
 				<div className='relative aspect-[4/3] rounded-lg overflow-hidden mb-6'>
 					<Image
-						src={project.galleryImages[selectedImageIndex]}
+						src={displayImage}
 						alt={project.title}
 						fill
 						className='object-cover'
+						sizes='(max-width: 1024px) 100vw, 66vw'
 					/>
 				</div>
 
-				{/* Thumbnail Gallery */}
-				<div className='grid grid-cols-4 gap-4'>
-					{project.galleryImages.map((image, index) => (
+				{/* Thumbnail Gallery - Display if galleryImages exist */}
+				{project.galleryImages && project.galleryImages.length > 0 && (
+					<div className='grid grid-cols-4 gap-4'>
+						{/* Main project image as a thumbnail (optional, but good for consistency) */}
 						<button
-							key={index}
-							onClick={() => setSelectedImageIndex(index)}
+							onClick={() =>
+								handleThumbnailClick(project.coverImage || project.image, -1)
+							}
 							className={`relative aspect-square rounded-lg overflow-hidden border-2 transition-all duration-200 ${
-								selectedImageIndex === index
+								activeThumbnailIndex === -1
 									? 'border-red-600 ring-2 ring-red-600 ring-opacity-50'
 									: 'border-gray-200 hover:border-gray-300'
 							}`}
 						>
 							<Image
-								src={image}
-								alt={`Gallery ${index + 1}`}
+								src={project.image}
+								alt={`${project.title} - Main View`}
 								fill
 								className='object-cover'
 							/>
 						</button>
-					))}
-				</div>
+
+						{/* Other gallery images as thumbnails */}
+						{project.galleryImages.slice(0, 3).map((image, index) => (
+							<button
+								key={index}
+								onClick={() => handleThumbnailClick(image, index)}
+								className={`relative aspect-square rounded-lg overflow-hidden border-2 transition-all duration-200 ${
+									activeThumbnailIndex === index
+										? 'border-red-600 ring-2 ring-red-600 ring-opacity-50'
+										: 'border-gray-200 hover:border-gray-300'
+								}`}
+							>
+								<Image
+									src={image}
+									alt={`Gallery thumbnail ${index + 1}`}
+									fill
+									className='object-cover'
+								/>
+							</button>
+						))}
+					</div>
+				)}
 			</div>
 
 			{/* Right Column - Project Details */}
 			<div className='lg:col-span-1'>
-				<div className='bg-white p-8 rounded-lg shadow-sm border border-gray-200 sticky top-8'>
+				<div className='bg-white p-8 rounded-lg shadow-sm border border-gray-200 sticky lg:top-8'>
 					<h2 className='text-2xl font-bold text-gray-900 mb-6'>
 						Project Details
 					</h2>
@@ -84,9 +121,13 @@ const ProjectDetailsContent = ({ project }) => {
 						</div>
 					</div>
 
-					<button className='w-full bg-red-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-red-700 transition-colors duration-200'>
+					{/* Changed button to Link component */}
+					<Link
+						href='/contact' // Link to your contact page
+						className='w-full bg-red-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-red-700 transition-colors duration-200 text-center inline-block'
+					>
 						Request Similar Project
-					</button>
+					</Link>
 				</div>
 			</div>
 		</div>

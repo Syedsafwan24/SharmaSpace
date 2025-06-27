@@ -99,8 +99,10 @@ export default function AdminBlogPostsPage() {
     <div className="flex flex-col min-h-screen bg-[#F8F9FA]">
       <TopNavbar />
       <div className="flex flex-1">
-        <Sidebar />
-        <div className="flex-1 p-4 lg:p-8 pt-20 lg:pt-8 pb-20 lg:pb-8">
+        <div className="hidden lg:block fixed top-0 left-0 h-full w-64 z-20 bg-white border-r">
+          <Sidebar />
+        </div>
+        <div className="flex-1 p-4 lg:p-8 pt-20 lg:pt-8 pb-20 lg:pb-8 lg:ml-64">
           <BlogHeader onAddBlogPostClick={handleAddBlogPost} />
           <BlogSearchFilter
             searchQuery={searchQuery}
@@ -108,7 +110,7 @@ export default function AdminBlogPostsPage() {
             activeFilter={activeFilter}
             setActiveFilter={setActiveFilter}
           />
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredBlogPosts.map((post) => (
               <BlogCard key={post.id} post={post} onEdit={handleEditBlogPost} />
             ))}

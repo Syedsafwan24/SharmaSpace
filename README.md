@@ -1,6 +1,6 @@
 # Sharma Space - Next.js Interior Design Website
 
-A modern, responsive interior design website built with Next.js 14, TypeScript, and Tailwind CSS.
+A modern, responsive interior design website built with Next.js 14, TypeScript, and Tailwind CSS, now featuring user authentication and a protected admin dashboard.
 
 ## Features
 
@@ -11,6 +11,8 @@ A modern, responsive interior design website built with Next.js 14, TypeScript, 
 - **SEO Optimized** with proper meta tags and structured data
 - **Image Optimization** using Next.js Image component
 - **Performance Optimized** with lazy loading and code splitting
+- **User Authentication** using NextAuth.js
+- **Protected Admin Dashboard** for authorized users
 
 ## Getting Started
 
@@ -52,25 +54,27 @@ This project uses PostgreSQL as its database and Prisma as the ORM.
     GRANT ALL PRIVILEGES ON DATABASE sharma_space TO sharmaspaceadmin;
     ```
 
-3.  **Configure Environment Variables:** Create a `.env.local` file in the root of your project (if it doesn't exist) and add your database connection string. Replace `YOUR_PASSWORD` with the actual password you set for `sharmaspaceadmin`.
+3.  **Configure Environment Variables:** Create a `.env.local` file in the root of your project (if it doesn't exist) and add your database connection string and NextAuth.js secrets. Replace `YOUR_SECRET_KEY` with a strong, randomly generated string (e.g., using `openssl rand -base64 32`).
     ```env
-    DATABASE_URL="postgresql://sharmaspaceadmin:'Admin@123'@localhost:5432/sharma_space"
+    DATABASE_URL="postgresql://sharmaspaceadmin:Admin@123@localhost:5432/sharma_space"
+    NEXTAUTH_SECRET=YOUR_SECRET_KEY
+    NEXTAUTH_URL=http://localhost:3000
     ```
 
 4.  **Initialize Prisma:** Run the following command to generate the Prisma client and synchronize your database schema with your Prisma schema. This will create tables based on your `prisma/schema.prisma` file.
     ```bash
-    npm run db:push
+    npx dotenv -e .env.local -- npx prisma db push
     ```
 
 ### Running the Development Server
 
 ```bash
-npm run dev
+npx dotenv -e .env.local -- next dev
 # or
-yarn dev
+npx dotenv -e .env.local -- next dev -p 4000 -H 0.0.0.0
 ```
 
-4. Open [http://localhost:3000](http://localhost:3000) in your browser.
+5. Open [http://localhost:3000](http://localhost:3000) (or your specified port) in your browser.
 
 ## Project Structure
 
@@ -83,14 +87,35 @@ yarn dev
 │   ├── services/         # Services page
 │   ├── portfolio/        # Portfolio page
 │   ├── blog/            # Blog page
-│   └── contact/         # Contact page
+│   ├── contact/         # Contact page
+│   ├── login/           # Login page
+│   ├── register/        # Registration page
+│   └── api/             # API routes
+│       ├── auth/        # NextAuth.js API routes
+│       │   └── [...nextauth]/route.js
+│       └── register/    # User registration API
+│           └── route.js
 ├── components/           # Reusable components
+│   ├── about/           # Components specific to the About page
+│   ├── blog/            # Components specific to the Blog page
+│   ├── portfolio/       # Components specific to the Portfolio page
+│   ├── services/        # Components specific to the Services page
 │   ├── ui/              # UI components
-│   └── providers/       # Context providers
+│   ├── providers/       # Context providers
+│   └── AuthSessionProvider.js # NextAuth.js Session Provider
 ├── hooks/               # Custom React hooks
 ├── lib/                 # Utility functions
 └── public/             # Static assets
 ```
+
+## Authentication & User Management
+
+This project implements a robust authentication system using NextAuth.js and Prisma.
+
+-   **Registration:** New users can create an account via the `/register` page. Passwords are securely hashed using `bcryptjs` before being stored in the database.
+-   **Login:** Users can log in via the `/login` page using their registered email and password.
+-   **Protected Dashboard:** The `/admin/dashboard` route is protected, requiring users to be authenticated to access it. Unauthenticated users will be redirected to the login page.
+-   **Logout:** A logout button is available (e.g., in the navigation bar) to sign out of the application.
 
 ## Key Features
 
@@ -139,7 +164,7 @@ npm start
 
 ## Environment Variables
 
-Environment variables, including your `DATABASE_URL`, are configured in the `.env.local` file. Refer to the [Database Setup](#database-setup-postgresql--prisma) section for details on configuring your `DATABASE_URL`.
+Environment variables, including your `DATABASE_URL`, `NEXTAUTH_SECRET`, and `NEXTAUTH_URL`, are configured in the `.env.local` file. Refer to the [Database Setup](#database-setup-postgresql--prisma) section for details on configuring these variables.
 
 ## Contributing
 

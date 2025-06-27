@@ -15,7 +15,7 @@ const Footer = () => {
   const contactInfo = [
     '123 Design Avenue, Mumbai, Maharashtra, India 400001',
     '+91 98765 43210',
-    'info@sharmaspace.com',
+    'info@sharmaspace.in',
     'Mon-Sat: 10 AM - 7 PM'
   ];
 

@@ -37,7 +37,7 @@ export const metadata = {
 		address: false,
 		telephone: false,
 	},
-	metadataBase: new URL('https://sharmaspace.com'),
+	metadataBase: new URL('https://sharmaspace.in'),
 	alternates: {
 		canonical: '/',
 	},
@@ -46,7 +46,7 @@ export const metadata = {
 			'Interior Designers in Bangalore | Free 3D Consultation - Sharma Space',
 		description:
 			"Transform your space with Bangalore's leading interior designers. Custom residential & commercial design solutions. Book free consultation today!",
-		url: 'https://sharmaspace.com',
+		url: 'https://sharmaspace.in',
 		siteName: 'Sharma Space',
 		images: [
 			{
@@ -90,7 +90,7 @@ export default function RootLayout({ children }) {
 						__html: JSON.stringify({
 							'@context': 'https://schema.org',
 							'@type': 'LocalBusiness',
-							'@id': 'https://sharmaspace.com',
+							'@id': 'https://sharmaspace.in',
 							name: 'Sharma Space',
 							description:
 								'Interior design studio specializing in functional, personalized spaces blending aesthetics with practicality.',
@@ -103,8 +103,8 @@ export default function RootLayout({ children }) {
 								addressCountry: 'IN',
 							},
 							telephone: '+91 98765 43210',
-							email: 'info@sharmaspace.com',
-							url: 'https://sharmaspace.com',
+							email: 'info@sharmaspace.in',
+							url: 'https://sharmaspace.in',
 							openingHoursSpecification: {
 								'@type': 'OpeningHoursSpecification',
 								dayOfWeek: [

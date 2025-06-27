@@ -2,7 +2,6 @@
 
 import React from 'react';
 import Link from 'next/link';
-// Import only the specific icons needed for contact info
 import { MapPin, Phone, Mail, Clock } from 'lucide-react';
 
 const Footer = () => {
@@ -14,6 +13,7 @@ const Footer = () => {
 		'Blog',
 		'Contact',
 	];
+
 	const services = [
 		'Residential Design',
 		'Commercial Design',
@@ -23,35 +23,42 @@ const Footer = () => {
 		'Renovation Consultation',
 	];
 
-	// Restructured contactInfo to include icon components directly
 	const contactInfo = [
 		{
 			icon: MapPin,
 			text: '123 Design Avenue, Mumbai, Maharashtra, India 400001',
+			iconClass: 'flex-shrink-0',
 		},
-		{ icon: Phone, text: '+91 98765 43210' },
-		{ icon: Mail, text: 'info@sharmaspace.in' },
-		{ icon: Clock, text: 'Mon-Sat: 10 AM - 7 PM' },
+		{
+			icon: Phone,
+			text: '+91 98765 43210',
+			iconClass: 'flex-shrink-0',
+		},
+		{
+			icon: Mail,
+			text: 'info@sharmaspace.in',
+			iconClass: 'flex-shrink-0',
+		},
+		{
+			icon: Clock,
+			text: 'Mon-Sat: 10 AM - 7 PM',
+			iconClass: 'flex-shrink-0',
+		},
 	];
 
 	const legalLinks = ['Privacy Policy', 'Terms of Service', 'Sitemap'];
 
 	return (
 		<>
-			{' '}
-			{/* Fragment used for consistency, though only footer is returned */}
 			<footer className='bg-[#1F1F1F] text-white py-12 md:py-20'>
-				{' '}
-				{/* Darker background color */}
 				<div className='max-w-6xl mx-auto px-4 sm:px-6'>
 					<div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12 mb-12'>
-						{/* Company Info with Logo AND "Sharma Space" text (NO social icons here) */}
+						{/* Company Info with Logo and "Sharma Space" text */}
 						<div className='flex flex-col items-start'>
 							<Link
 								href='/'
 								className='flex items-center gap-2 mb-4 transition-transform duration-300 hover:scale-105'
 							>
-								{/* Red box for logo as per previous discussions */}
 								<div className='w-10 h-10 bg-red-600 rounded-md flex items-center justify-center p-1'>
 									<img
 										src='/images/icon/SharmaSpace-Logo.png'
@@ -59,7 +66,6 @@ const Footer = () => {
 										className='w-full h-full object-contain'
 									/>
 								</div>
-								{/* Re-added "Sharma Space" text next to logo */}
 								<span className='text-2xl font-bold text-white'>
 									Sharma Space
 								</span>
@@ -68,7 +74,6 @@ const Footer = () => {
 								Creating functional and beautiful spaces that reflect your
 								personality and enhance your lifestyle.
 							</p>
-							{/* Social Icons section REMOVED from here, as explicitly stated now */}
 						</div>
 
 						{/* Quick Links */}
@@ -110,8 +115,11 @@ const Footer = () => {
 							<h4 className='text-xl font-semibold mb-5'>Contact Us</h4>
 							<ul className='list-none p-0 m-0 space-y-3'>
 								{contactInfo.map((item, index) => (
-									<li key={index} className='flex items-start gap-3'>
-										<item.icon size={20} className='text-red-600 mt-1' />
+									<li key={index} className='flex items-start gap-4'>
+										<item.icon
+											size={18}
+											className='text-red-600 flex-shrink-0 mt-1'
+										/>
 										<span className='text-gray-300 text-base leading-relaxed'>
 											{item.text}
 										</span>
@@ -126,7 +134,6 @@ const Footer = () => {
 						<p className='text-gray-300 text-sm m-0'>
 							© {new Date().getFullYear()} Sharma Space. All rights reserved.
 						</p>
-
 						<div className='flex flex-wrap justify-center md:justify-start gap-4'>
 							{legalLinks.map((link, index) => (
 								<a
@@ -141,7 +148,6 @@ const Footer = () => {
 					</div>
 				</div>
 			</footer>
-			{/* Floating Action Buttons REMOVED entirely */}
 		</>
 	);
 };

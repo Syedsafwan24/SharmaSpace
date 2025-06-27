@@ -1,10 +1,12 @@
-// app/portfolio/[slug]/page.jsx
 import ProjectDetailsHeader from '@/components/portfolio/ProjectDetails/ProjectDetailsHeader';
 import ProjectDetailsContent from '@/components/portfolio/ProjectDetails/ProjectDetailsContent';
 import ProjectGallery from '@/components/portfolio/ProjectDetails/ProjectGallery';
 import CtaSection from '@/components/portfolio/ProjectDetails/CtaSection';
 import Link from 'next/link';
 import { portfolioProjects } from '@/data/portfolioData';
+import Cta from '@/components/Cta';
+import Footer from '@/components/Footer';
+import Navigation from '@/components/Navigation'; // Ensure this import is present
 
 export async function generateStaticParams() {
 	return portfolioProjects.map((project) => ({
@@ -35,14 +37,27 @@ export default function ProjectDetail({ params }) {
 
 	return (
 		<div className='min-h-screen'>
+			<Navigation /> {/* Add the Navigation component here */}
 			<ProjectDetailsHeader project={project} />
 			<div className='container mx-auto px-4 py-12'>
 				<ProjectDetailsContent project={project} />
-				{project.galleryImages?.length > 0 && (
-					<ProjectGallery images={project.galleryImages} />
+
+				{/* Render ProjectGallery only if there are images or a video */}
+				{(project.galleryImages?.length > 0 || project.videoUrl) && (
+					<ProjectGallery
+						images={project.galleryImages}
+						videoUrl={project.videoUrl}
+					/>
 				)}
-				<CtaSection />
+
+				{/* Pass current project slug and category to CtaSection */}
+				<CtaSection
+					currentProjectSlug={project.slug}
+					currentProjectCategory={project.category}
+				/>
 			</div>
+			<Cta />
+			<Footer />
 		</div>
 	);
 }

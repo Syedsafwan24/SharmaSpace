@@ -1,4 +1,6 @@
 // components/HeroBanner.jsx
+import Link from 'next/link';
+
 const Cta = ({
 	title = 'Ready to Transform Your Space?',
 	description = "Let's collaborate to create a space that perfectly balances aesthetics and functionality.",
@@ -7,29 +9,35 @@ const Cta = ({
 	textColor = 'text-white',
 	buttonBgColor = 'bg-white',
 	buttonTextColor = 'text-[#E63946]',
-	buttonLink = '#',
+	buttonLink = '/contact',
 	maxWidth = 'max-w-2xl',
 }) => {
 	return (
-		<section className={`${backgroundColor} py-12 px-4 sm:py-16`}>
-			<div className={`${maxWidth} mx-auto text-center`}>
-				<h1 className={`${textColor} text-2xl sm:text-3xl font-bold mb-4`}>
+		<section className={`${backgroundColor} py-12 sm:py-16`}>
+			<div className={`container ${maxWidth} px-4 mx-auto text-center`}>
+				<h1 className={`${textColor} text-3xl sm:text-4xl font-extrabold mb-4`}>
 					{title}
 				</h1>
 
-				{/* Responsive description - single line only on large screens */}
 				<p
-					className={`${textColor} text-sm sm:text-base mb-6 mx-auto lg:whitespace-nowrap`}
+					className={`${textColor} text-sm sm:text-base mb-6 lg:whitespace-nowrap max-w-prose mx-auto`}
 				>
 					{description}
 				</p>
 
-				<a
+				<Link
 					href={buttonLink}
-					className={`${buttonBgColor} ${buttonTextColor} px-6 py-2 text-sm sm:text-base font-medium rounded-full hover:bg-gray-50 transition-all duration-200 shadow-sm hover:shadow-md inline-block`}
+					aria-label={buttonText}
+					className={`
+						${buttonBgColor} ${buttonTextColor}
+						inline-block px-6 py-2 rounded-full font-semibold
+						text-sm sm:text-base transition duration-200 ease-in-out
+						hover:shadow-md hover:bg-opacity-90
+						focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2
+					`}
 				>
 					{buttonText}
-				</a>
+				</Link>
 			</div>
 		</section>
 	);

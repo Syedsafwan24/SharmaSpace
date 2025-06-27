@@ -2,13 +2,13 @@
 import React from 'react';
 import Image from 'next/image';
 
-const OurStory = () => {
+const HeroPortfolio = () => {
 	return (
 		<section className='relative w-full h-[200px] sm:h-[250px] md:h-[300px] lg:h-[350px] flex items-center justify-center text-center overflow-hidden'>
 			{/* Background Image with darker overlay */}
 			<div className='absolute inset-0'>
 				<Image
-					src='/images/AboutPage/our-story.jpg'
+					src='/images/port.jpg'
 					alt='Our Expertise in Interior Design Background'
 					fill
 					priority
@@ -22,11 +22,11 @@ const OurStory = () => {
 			{/* Overlay Content */}
 			<div className='relative z-10 text-white px-4 max-w-4xl mx-auto'>
 				<h1 className='text-2xl sm:text-3xl md:text-4xl font-bold'>
-					Our Story
+					Our Work Speak for itself
 				</h1>
 			</div>
 		</section>
 	);
 };
 
-export default OurStory;
+export default HeroPortfolio;

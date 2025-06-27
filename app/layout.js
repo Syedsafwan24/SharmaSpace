@@ -5,8 +5,9 @@ import { Toaster as Sonner } from '@/components/ui/sonner';
 import { TooltipProvider } from '@/components/ui/tooltip';
 import { QueryProvider } from '@/components/providers/query-provider';
 import AuthSessionProvider from '@/components/AuthSessionProvider';
-import Navigation from "@/components/Navigation";
-import Footer from "@/components/Footer";
+import Navigation from '@/components/Navigation';
+import Footer from '@/components/Footer';
+import WelcomeModal from '@/components/WelcomeModal'; // Import your WelcomeModal component
 
 const poppins = Poppins({
 	subsets: ['latin'],
@@ -47,7 +48,7 @@ export const metadata = {
 	openGraph: {
 		title:
 			'Interior Designers in Bangalore | Free 3D Consultation - Sharma Space',
-			description:
+		description:
 			"Transform your space with Bangalore's leading interior designers. Custom residential & commercial design solutions. Book free consultation today!",
 		url: 'https://sharmaspace.in',
 		siteName: 'Sharma Space',
@@ -66,7 +67,7 @@ export const metadata = {
 		card: 'summary_large_image',
 		title:
 			'Interior Designers in Bangalore | Free 3D Consultation - Sharma Space',
-			description:
+		description:
 			"Transform your space with Bangalore's leading interior designers. Custom residential & commercial design solutions. Book free consultation today!",
 		images: ['/images/Hero-Background.webp'],
 	},
@@ -141,13 +142,24 @@ export default function RootLayout({ children }) {
 				<AuthSessionProvider>
 					<QueryProvider>
 						<TooltipProvider>
+							{/* Navigation component, rendered once for the entire site */}
+							<Navigation />
+
+							{/* This is where your page content will be rendered */}
 							{children}
+
+							{/* Footer component, rendered once for the entire site */}
+							<Footer />
+
+							{/* WelcomeModal component for the popup, also rendered once */}
+							<WelcomeModal />
+
+							{/* Toasters for notifications */}
 							<Toaster />
 							<Sonner />
 						</TooltipProvider>
 					</QueryProvider>
 				</AuthSessionProvider>
-				
 			</body>
 		</html>
 	);

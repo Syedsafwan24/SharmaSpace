@@ -1,13 +1,23 @@
-import React from 'react';
-import { Sofa, Building, Hotel, LayoutGrid, Chair, Hammer } from 'lucide-react';
+'use client';
 
+import React from 'react';
+import {
+  Sofa,
+  Building,
+  Hotel,
+  LayoutGrid,
+  Hammer,
+  Armchair
+} from 'lucide-react';
+
+// Map icon names to components
 const iconMap = {
   Sofa: Sofa,
   Building: Building,
   Hotel: Hotel,
   LayoutGrid: LayoutGrid,
-  Chair: Chair,
   Hammer: Hammer,
+  Armchair: Armchair, // Replaces Chair
 };
 
 const ServiceCard = ({ service, onEdit }) => {
@@ -25,7 +35,12 @@ const ServiceCard = ({ service, onEdit }) => {
       </div>
       <p className="text-gray-600 text-sm mb-4 line-clamp-3">{service.description}</p>
       <div className="flex space-x-4 mt-auto">
-        <button onClick={() => onEdit(service)} className="text-[#E63946] hover:text-[#D62828] font-medium text-sm">Edit</button>
+        <button
+          onClick={() => onEdit(service)}
+          className="text-[#E63946] hover:text-[#D62828] font-medium text-sm"
+        >
+          Edit
+        </button>
         <button className="text-gray-500 hover:text-[#1C1C1C] font-medium text-sm">Delete</button>
       </div>
     </div>

@@ -1,4 +1,5 @@
 // app/portfolio/[slug]/page.jsx
+import Link from "next/link";
 import ProjectDetailsHeader from '@/components/portfolio/ProjectDetails/Header';
 import ProjectDetailsContent from '@/components/portfolio/ProjectDetails/Content';
 import ProjectGallery from '@/components/portfolio/ProjectDetails/Gallery';

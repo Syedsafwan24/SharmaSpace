@@ -5,7 +5,7 @@ import { User } from 'lucide-react';
 const BlogCard = ({ post, onEdit }) => {
   return (
     <div className="bg-white rounded-lg shadow-md overflow-hidden">
-      <div className="relative w-full h-48">
+      <div className="relative w-full h-44">
         <Image
           src={post.image}
           alt={post.title}
@@ -13,7 +13,7 @@ const BlogCard = ({ post, onEdit }) => {
           className="object-cover"
         />
       </div>
-      <div className="p-4">
+      <div className="p-3">
         <div className="flex items-center gap-2 mb-2">
           <span className="bg-[#EDEDED] text-[#E63946] text-xs font-medium px-2.5 py-0.5 rounded-full">
             {post.category}

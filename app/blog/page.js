@@ -1,30 +1,33 @@
-// app/blog/page.js
-import Navigation from '@/components/Navigation';
-import Footer from '@/components/Footer';
-import BlogHero from '@/components/blog/BlogHero';
-import BlogSection from '@/components/blog/BlogSection';
-import NewsletterSection from '@/components/blog/NewsletterSection';
-
-// Import the blogPosts array directly
-import { blogPosts } from '@/data/blogPosts';
+import Navigation from "@/components/Navigation";
+import Footer from "@/components/Footer";
+import BlogCard from "@/components/blog/BlogCard";
+import { blogPosts } from "@/app/data/blogPosts";
 
 export const metadata = {
-	title: 'Interior Design Blog - Tips & Trends',
-	description:
-		'Interior design blog with latest trends, tips, and insights from Bangalore experts. Home decor ideas, design guides, and industry updates.',
+  title: "Interior Design Blog - Tips & Trends",
+  description: "Interior design blog with latest trends, tips, and insights from Bangalore experts. Home decor ideas, design guides, and industry updates.",
 };
 
 export default function Blog() {
-	return (
-		<div className='bg-gray-50'>
-			<Navigation />
-			<main>
-				<BlogHero />
-				{/* Pass the imported blogPosts array to BlogSection */}
-				<BlogSection posts={blogPosts} />
-				<NewsletterSection />
-			</main>
-			<Footer />
-		</div>
-	);
+  return (
+    <div className="bg-gray-50">
+      <Navigation />
+      <main className="min-h-[60vh] py-20">
+        <div className="max-w-6xl mx-auto px-6 text-center">
+          <h1 className="text-4xl font-bold text-gray-900 mb-6">
+            Design Blog
+          </h1>
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-12">
+            Latest trends, tips, and insights from our interior design experts.
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {blogPosts.map((post) => (
+              <BlogCard key={post.slug} post={post} />
+            ))}
+          </div>
+        </div>
+      </main>
+      <Footer />
+    </div>
+  );
 }

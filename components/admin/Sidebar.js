@@ -10,6 +10,7 @@ const Sidebar = () => {
   const pathname = usePathname();
 
   const navItems = [
+    { name: 'Dashboard', href: '/admin/dashboard', icon: LayoutDashboard },
     { name: 'Projects', href: '/admin/projects', icon: Folder },
     { name: 'Services', href: '/admin/services', icon: Settings },
     { name: 'Blog Posts', href: '/admin/blog-posts', icon: FileText },
@@ -72,7 +73,7 @@ const Sidebar = () => {
       {/* Bottom Navigation for Mobile */}
       <div className="fixed bottom-0 left-0 right-0 bg-white shadow-lg lg:hidden z-50">
         <div className="flex justify-around items-center h-16">
-          {navItems.map((item) => (
+          {navItems.filter(item => item.name !== 'Messages').map((item) => (
           <Link
             key={item.name}
             href={item.href}

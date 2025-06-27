@@ -1,30 +1,59 @@
-## User Creation Feature Implementation
+## Admin Dashboard UI Recreation Plan
 
-This plan outlines the steps to implement a user registration feature, allowing new users to create accounts and log in.
+This plan outlines the steps to create a pixel-perfect recreation of the provided dashboard UI, adhering strictly to the specified color palette and design.
 
-### Todo Items:
+### Phase 1: Setup and Layout
 
-- [x] **1. Update Prisma Schema:**
-    - Define a `User` model in `prisma/schema.prisma` with fields like `id`, `email`, `name`, and `password` (hashed).
-    - Run `npx prisma db push` or `npx prisma migrate dev` to apply schema changes to the database.
-- [x] **2. Create Registration API Endpoint:**
-    - Create a new API route `app/api/register/route.js`.
-    - Implement a `POST` handler to receive user registration data.
-    - Hash the password using `bcryptjs` before saving it to the database.
-    - Handle potential errors like duplicate email addresses.
-- [x] **3. Create Registration Page (`app/register/page.js`):**
-    - Create a new route `app/register/page.js`.
-    - Design a registration form with fields for email, username, and password.
-    - Implement client-side logic to submit registration data to the `/api/register` endpoint.
-    - Redirect to the login page upon successful registration.
-- [x] **4. Update NextAuth.js Credentials Provider:**
-    - Modify the `authorize` function in `app/api/auth/[...nextauth]/route.js` to query the database for user credentials instead of using hardcoded values.
-    - Compare the provided password with the hashed password from the database using `bcryptjs`.
+- [ ] **Update `app/admin/dashboard/page.js`:**
+    - Set up the main dashboard layout (sidebar and main content area).
+    - Integrate new components into this layout.
 
-### Review Section:
-- Updated Prisma schema to include a `User` model.
-- Successfully pushed Prisma schema changes to the database.
-- Implemented a registration API endpoint (`/api/register`) to handle user creation with password hashing.
-- Created a user registration page (`/register`) with a form for new user sign-ups.
-- Modified the NextAuth.js Credentials Provider to authenticate users against the database.
-- **Fixed login page:** Corrected `app/login/page.js` to send `email` instead of `username` to the NextAuth.js API route.
+- [ ] **Create `components/admin/Sidebar.js`:**
+    - Implement the navigation sidebar with links for Dashboard, Projects, Services, Blog Posts, Testimonials, and Messages.
+    - Include the "Sharma Space" logo and "Admin Panel" text.
+    - Add the "Back to Website" link at the bottom.
+    - Use appropriate Lucide React icons for each menu item.
+
+- [ ] **Create `components/admin/DashboardHeader.js`:**
+    - Implement the "Dashboard" title and "Overview of your website content and analytics" subtitle.
+
+### Phase 2: Dashboard Widgets
+
+- [ ] **Create `components/admin/StatsCard.js`:**
+    - Design a reusable card component for displaying statistics (Total Projects, Total Services, Testimonials, Messages, Blog Posts).
+    - Ensure it matches the reference image's layout, typography, and colors.
+    - Use appropriate Lucide React icons.
+
+- [ ] **Create `components/admin/RecentMessages.js`:**
+    - Implement the "Recent Messages" section, displaying sender, timestamp, and message snippet.
+    - Match the typography, spacing, and card design.
+
+- [ ] **Create `components/admin/ProjectCategories.js`:**
+    - Implement the "Project Categories" section with progress bars.
+    - Match the bar colors, percentages, and typography.
+
+- [ ] **Create `components/admin/RecentProjects.js`:**
+    - Implement the "Recent Projects" section with project images, titles, and categories.
+    - Match the layout, image sizes, and typography.
+
+### Phase 3: Styling and Refinement
+
+- [ ] **Apply Global Styling and Refinements:**
+    - Ensure all components strictly adhere to the provided color palette:
+        - Primary: Soft White (#F8F9FA)
+        - Accent: Red (#E63946)
+        - Secondary: Charcoal Black (#1C1C1C)
+        - Highlight: Light Gray (#EDEDED)
+        - CTA: Deep Red (#D62828)
+    - Maintain identical proportions, spacing, alignment, line weights, and shadows as shown in the reference image.
+    - Use placeholder data for all dynamic content.
+
+### Review
+
+- [ ] All visual elements match the reference images exactly.
+- [ ] Precise color palette is used, with no color substitutions.
+- [ ] Identical proportions, spacing, and alignment are maintained.
+- [ ] All details including shapes, line weights, textures, typography, shadows, highlights, and gradients are replicated.
+- [ ] Dimensions and scale match the original.
+- [ ] Specific design elements or unique characteristics are preserved.
+- [ ] Output is indistinguishable from the reference images when compared side-by-side.

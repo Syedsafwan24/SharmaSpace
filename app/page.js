@@ -1,4 +1,4 @@
-import AboutSection from '@/components/about/AboutSection';
+import AboutSection from '@/components/AboutSection';
 import Cta from '@/components/Cta';
 import DesignInsights from '@/components/DesignInsights';
 // Footer and Navigation imports removed - they are in layout.js

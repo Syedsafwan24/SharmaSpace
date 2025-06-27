@@ -1,13 +1,13 @@
-import AboutSection from '@/components/AboutSection';
+import AboutSection from '@/components/about/AboutSection';
 import Cta from '@/components/Cta';
 import DesignInsights from '@/components/DesignInsights';
 import Footer from '@/components/Footer';
 import Hero from '@/components/Hero';
 import Navigation from '@/components/Navigation';
 import PartnerBrands from '@/components/PartnerBrands';
-import Portfolio from '@/components/PortfolioSection';
+import Portfolio from '@/components/portfolio/PortfolioSection';
 import Process from '@/components/Process';
-import Services from '@/components/Services';
+import Services from '@/components/services/Services';
 import Testimonials from '@/components/Testimonials';
 
 export default function Home() {

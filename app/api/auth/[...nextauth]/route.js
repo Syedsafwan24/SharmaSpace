@@ -19,14 +19,14 @@ const handler = NextAuth({
 
         if (!credentials?.email || !credentials?.password) {
           console.log('Missing email or password.');
-          return null;
+          throw new Error("Please enter both email and password.");
         }
 
         const user = await prisma.user.findUnique({ where: { email: credentials.email } });
 
         if (!user) {
           console.log('User not found for email:', credentials.email);
-          return null;
+          throw new Error("No user found with this email.");
         }
 
         console.log('User found:', user.email);
@@ -34,7 +34,7 @@ const handler = NextAuth({
 
         if (!isPasswordValid) {
           console.log('Password validation failed for user:', user.email);
-          return null;
+          throw new Error("Incorrect password.");
         }
 
         console.log('Authorization successful for user:', user.email);

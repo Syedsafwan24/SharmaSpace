@@ -96,6 +96,10 @@ npx dotenv -e .env.local -- next dev -p 4000 -H 0.0.0.0
 │       └── register/    # User registration API
 │           └── route.js
 ├── components/           # Reusable components
+│   ├── about/           # Components specific to the About page
+│   ├── blog/            # Components specific to the Blog page
+│   ├── portfolio/       # Components specific to the Portfolio page
+│   ├── services/        # Components specific to the Services page
 │   ├── ui/              # UI components
 │   ├── providers/       # Context providers
 │   └── AuthSessionProvider.js # NextAuth.js Session Provider

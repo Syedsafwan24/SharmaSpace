@@ -80,16 +80,6 @@ const Navigation = () => {
 
 				{/* Social Icons */}
 				<div className='flex gap-4'>
-					{session && (
-						<button
-							onClick={() => signOut({ callbackUrl: '/login' })}
-							className={`font-medium transition-all duration-300 text-base relative hover:-translate-y-0.5 bg-transparent border-none cursor-pointer ${
-								isScrolled ? 'text-gray-900 hover:text-red-600' : 'text-white hover:text-red-600'
-							}`}
-						>
-							Logout
-						</button>
-					)}
 					{[
 						{ Icon: Instagram, href: '#' },
 						{ Icon: Facebook, href: '#' },

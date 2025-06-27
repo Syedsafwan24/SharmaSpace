@@ -1,0 +1,6 @@
+- [x] Create a new component file `components/OurStory.js`.
+- [x] Create a new component file `components/OurJourney.js`.
+- [x] Update `app/about/page.js` to import and use the new components.
+- [x] Update `components/OurJourney.js` with the new design using Tailwind CSS.
+- [x] Fix the image loading of the `OurStory` component.
+- [ ] Review the changes and make sure they match the screenshot.

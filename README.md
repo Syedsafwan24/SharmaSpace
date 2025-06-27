@@ -18,6 +18,7 @@ A modern, responsive interior design website built with Next.js 14, TypeScript, 
 
 - Node.js 18+ 
 - npm or yarn
+- PostgreSQL (local or remote)
 
 ### Installation
 
@@ -34,7 +35,35 @@ npm install
 yarn install
 ```
 
-3. Run the development server:
+### Database Setup (PostgreSQL & Prisma)
+
+This project uses PostgreSQL as its database and Prisma as the ORM.
+
+1.  **Ensure PostgreSQL is running:** If you're using a local PostgreSQL instance, make sure it's active. For Ubuntu, you can start it with:
+    ```bash
+    sudo pg_ctlcluster 16 main start
+    ```
+
+2.  **Create Database and User:** If you haven't already, create a database and a user for your application. For example:
+    ```sql
+    -- Connect to your PostgreSQL server (e.g., psql -U postgres)
+    CREATE USER sharmaspaceadmin WITH PASSWORD 'Admin@123';
+    CREATE DATABASE sharma_space OWNER sharmaspaceadmin;
+    GRANT ALL PRIVILEGES ON DATABASE sharma_space TO sharmaspaceadmin;
+    ```
+
+3.  **Configure Environment Variables:** Create a `.env.local` file in the root of your project (if it doesn't exist) and add your database connection string. Replace `YOUR_PASSWORD` with the actual password you set for `sharmaspaceadmin`.
+    ```env
+    DATABASE_URL="postgresql://sharmaspaceadmin:'Admin@123'@localhost:5432/sharma_space"
+    ```
+
+4.  **Initialize Prisma:** Run the following command to generate the Prisma client and synchronize your database schema with your Prisma schema. This will create tables based on your `prisma/schema.prisma` file.
+    ```bash
+    npm run db:push
+    ```
+
+### Running the Development Server
+
 ```bash
 npm run dev
 # or
@@ -110,11 +139,7 @@ npm start
 
 ## Environment Variables
 
-Create a `.env.local` file for environment-specific variables:
-
-```env
-NEXT_PUBLIC_SITE_URL=https://your-domain.com
-```
+Environment variables, including your `DATABASE_URL`, are configured in the `.env.local` file. Refer to the [Database Setup](#database-setup-postgresql--prisma) section for details on configuring your `DATABASE_URL`.
 
 ## Contributing
 

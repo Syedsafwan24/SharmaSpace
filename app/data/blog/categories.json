@@ -1,0 +1,50 @@
+{
+  "categories": [
+    {
+      "id": "trends",
+      "name": "TRENDS",
+      "slug": "trends",
+      "description": "Latest interior design trends and innovations",
+      "metaTitle": "Interior Design Trends | Bangalore Experts | Sharma Space",
+      "metaDescription": "Stay updated with latest interior design trends in Bangalore. Expert insights on modern home decor, furniture & styling trends.",
+      "color": "#E63946",
+      "icon": "TrendingUp",
+      "postCount": 15,
+      "featured": true,
+      "keywords": ["interior design trends", "bangalore trends", "home decor trends", "modern design"]
+    },
+    {
+      "id": "guides",
+      "name": "GUIDES", 
+      "slug": "guides",
+      "description": "Step-by-step guides for interior design projects",
+      "metaTitle": "Interior Design Guides | DIY Tips | Bangalore Designers",
+      "metaDescription": "Comprehensive interior design guides from Bangalore experts. Learn design principles, space planning & decoration tips.",
+      "color": "#F97316",
+      "icon": "BookOpen",
+      "postCount": 12,
+      "featured": true,
+      "keywords": ["interior design guide", "home design tips", "bangalore interior guide", "design principles"]
+    },
+    {
+      "id": "tips",
+      "name": "TIPS",
+      "slug": "tips",
+      "description": "Quick tips and tricks for better interior design",
+      "metaTitle": "Interior Design Tips | Quick Home Decor Ideas | Bangalore",
+      "metaDescription": "Expert interior design tips for Bangalore homes. Quick solutions for space optimization, decor & styling.",
+      "color": "#E63946",
+      "icon": "Lightbulb",
+      "postCount": 18,
+      "featured": true,
+      "keywords": ["interior design tips", "home decor tips", "bangalore design tips", "quick design solutions"]
+    }
+  ],
+  "metadata": {
+    "version": "1.0.0",
+    "lastUpdated": "2024-05-15T10:00:00Z",
+    "totalCategories": 3,
+    "description": "Blog categories for Sharma Space interior design content",
+    "seoCompliance": "Bangalore-focused keyword optimization"
+  }
+}

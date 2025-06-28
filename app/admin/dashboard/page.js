@@ -1,8 +1,7 @@
 'use client';
 
-import { useSession, signOut } from "next-auth/react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
 import Sidebar from "@/components/admin/Sidebar";
 import TopNavbar from "@/components/admin/TopNavbar";
 import DashboardHeader from "@/components/admin/DashboardHeader";
@@ -10,34 +9,94 @@ import StatsCard from "@/components/admin/StatsCard";
 import RecentMessages from "@/components/admin/RecentMessages";
 import ProjectCategories from "@/components/admin/ProjectCategories";
 import RecentProjects from "@/components/admin/RecentProjects";
+import { companyStats } from "@/app/data";
 
 export default function AdminDashboardPage() {
-  const { data: session, status } = useSession();
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
   const router = useRouter();
 
   useEffect(() => {
-    if (status === "unauthenticated") {
-      router.push("/login");
+    // Check if user is logged in
+    const currentUser = localStorage.getItem('currentUser');
+    if (!currentUser) {
+      router.push('/login');
+      return;
     }
-  }, [status, router]);
+    
+    try {
+      const userData = JSON.parse(currentUser);
+      setUser(userData);
+    } catch (error) {
+      router.push('/login');
+      return;
+    }
+    
+    setLoading(false);
+  }, [router]);
 
-  if (status === "loading") {
-    return <div className="min-h-screen flex items-center justify-center bg-[#F8F9FA]">Loading...</div>;
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-[#F8F9FA]">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#E63946] mx-auto mb-4"></div>
+          <p className="text-gray-600">Loading...</p>
+        </div>
+      </div>
+    );
   }
+
+  // Get stats from centralized data
+  const statsData = [
+    {
+      title: "Total Projects",
+      value: companyStats.find(s => s.id === 'projects-completed')?.value || 150,
+      icon: "Package",
+      color: "#E63946"
+    },
+    {
+      title: "Total Services",
+      value: "6",
+      icon: "Settings",
+      color: "#E63946"
+    },
+    {
+      title: "Testimonials",
+      value: companyStats.find(s => s.id === 'happy-clients')?.value || 500,
+      icon: "MessageSquare",
+      color: "#E63946"
+    },
+    {
+      title: "Messages",
+      value: "5",
+      icon: "Mail",
+      color: "#E63946"
+    },
+    {
+      title: "Blog Posts",
+      value: "6",
+      icon: "Edit",
+      color: "#E63946"
+    }
+  ];
 
   return (
     <div className="flex flex-col min-h-screen bg-[#F8F9FA]">
-      <TopNavbar /> {/* Visible on small screens */}
+      <TopNavbar user={user} />
       <div className="flex flex-1">
-        <Sidebar /> {/* Visible on large screens */}
-        <div className="flex-1 p-4 lg:p-8 pt-20 lg:pt-8 pb-20 lg:pb-8"> {/* Adjusted padding */}
-          <DashboardHeader />
+        <Sidebar />
+        <div className="flex-1 p-4 lg:p-8 pt-20 lg:pt-8 pb-20 lg:pb-8">
+          <DashboardHeader user={user} />
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 mb-8">
-            <StatsCard title="Total Projects" value="6" icon="Package" color="#E63946" />
-            <StatsCard title="Total Services" value="6" icon="Settings" color="#E63946" />
-            <StatsCard title="Testimonials" value="5" icon="MessageSquare" color="#E63946" />
-            <StatsCard title="Messages" value="5" icon="Mail" color="#E63946" />
-            <StatsCard title="Blog Posts" value="6" icon="Edit" color="#E63946" />
+            {statsData.map((stat, index) => (
+              <StatsCard 
+                key={index}
+                title={stat.title} 
+                value={stat.value} 
+                icon={stat.icon} 
+                color={stat.color} 
+              />
+            ))}
           </div>
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             <div className="lg:col-span-1">

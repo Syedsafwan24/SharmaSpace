@@ -1,23 +1,43 @@
 'use client';
 
-import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import Sidebar from "@/components/admin/Sidebar";
 import TopNavbar from "@/components/admin/TopNavbar";
 import MessageHeader from "@/components/admin/messages/MessageHeader";
 import MessageSearchFilter from "@/components/admin/messages/MessageSearchFilter";
 import MessageCard from "@/components/admin/messages/MessageCard";
-import { messagesData } from "@/app/data/messagesData";
 import ReplyMessageModal from "@/components/admin/messages/ReplyMessageModal";
 import ReplyMessageForm from "@/components/admin/messages/ReplyMessageForm";
+import { contactMessages } from "@/app/data";
 
 export default function AdminMessages() {
-  const { data: session, status } = useSession();
-  const router = useRouter();
-  const [messages, setMessages] = useState(messagesData);
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [messages, setMessages] = useState(contactMessages);
   const [searchTerm, setSearchTerm] = useState('');
-  const [filter, setFilter] = useState('All'); // 'All', 'Unread', 'Read'
+  const [filter, setFilter] = useState('All');
+  const [isReplyModalOpen, setIsReplyModalOpen] = useState(false);
+  const [messageToReply, setMessageToReply] = useState(null);
+  const router = useRouter();
+
+  useEffect(() => {
+    const currentUser = localStorage.getItem('currentUser');
+    if (!currentUser) {
+      router.push('/login');
+      return;
+    }
+    
+    try {
+      const userData = JSON.parse(currentUser);
+      setUser(userData);
+    } catch (error) {
+      router.push('/login');
+      return;
+    }
+    
+    setLoading(false);
+  }, [router]);
 
   const filteredMessages = messages.filter((message) => {
     const matchesSearch = 
@@ -41,9 +61,6 @@ export default function AdminMessages() {
     );
   };
 
-  const [isReplyModalOpen, setIsReplyModalOpen] = useState(false);
-  const [messageToReply, setMessageToReply] = useState(null);
-
   const handleReply = (message) => {
     setMessageToReply(message);
     setIsReplyModalOpen(true);
@@ -54,19 +71,20 @@ export default function AdminMessages() {
     setMessageToReply(null);
   };
 
-  useEffect(() => {
-    if (status === "unauthenticated") {
-      router.push("/login");
-    }
-  }, [status, router]);
-
-  if (status === "loading") {
-    return <div className="min-h-screen flex items-center justify-center bg-[#F8F9FA]">Loading...</div>;
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-[#F8F9FA]">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#E63946] mx-auto mb-4"></div>
+          <p className="text-gray-600">Loading...</p>
+        </div>
+      </div>
+    );
   }
 
   return (
     <div className="flex flex-col min-h-screen bg-[#F8F9FA]">
-      <TopNavbar />
+      <TopNavbar user={user} />
       <div className="flex flex-1">
         <Sidebar />
         <div className="flex-1 p-4 lg:p-8 pt-20 lg:pt-8 pb-20 lg:pb-8">

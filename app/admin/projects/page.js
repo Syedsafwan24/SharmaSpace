@@ -1,8 +1,7 @@
 'use client';
 
-import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import Sidebar from "@/components/admin/Sidebar";
 import TopNavbar from "@/components/admin/TopNavbar";
 import ProjectHeader from "@/components/admin/projects/ProjectHeader";
@@ -11,55 +10,36 @@ import ProjectCard from "@/components/admin/projects/ProjectCard";
 import EditProjectModal from "@/components/admin/projects/EditProjectModal";
 import EditProjectForm from "@/components/admin/projects/EditProjectForm";
 import { PlusCircle } from 'lucide-react';
-
-const projectsData = [
-  {
-    title: 'Modern Apartment in Mumbai',
-    category: 'Residential',
-    image: '/images/resident.jpg',
-    description: 'A sleek, minimalist design with neutral tones and contemporary furnishings. This project transformed...',
-  },
-  {
-    title: 'Luxury Villa in Delhi',
-    category: 'Residential',
-    image: '/images/bedroom-suite.jpg',
-    description: 'Opulent interiors with custom furniture and art pieces for a sophisticated living experience. This exclusive...',
-  },
-  {
-    title: 'Co-Working Space in Bangalore',
-    category: 'Commercial',
-    image: '/images/commercial.jpg',
-    description: 'A vibrant, collaborative workspace designed for productivity and creativity. This modern co-working...',
-  },
-  {
-    title: 'Urban Loft Renovation',
-    category: 'Residential',
-    image: '/images/sofa.jpg',
-    description: 'A stylish urban loft renovated with modern amenities and a focus on open-plan living. Features...',
-  },
-  {
-    title: 'Boutique Hotel Design',
-    category: 'Hospitality',
-    image: '/images/hospital.jpg',
-    description: 'An elegant boutique hotel designed to offer a unique and luxurious experience for guests. Blending...',
-  },
-  {
-    title: 'Retail Store Interior',
-    category: 'Commercial',
-    image: '/images/resident.jpg',
-    description: 'A contemporary retail space designed to enhance customer experience and showcase products effectively. Features...',
-  },
-];
+import { portfolioProjects } from '@/app/data';
 
 export default function AdminProjectsPage() {
-  const { data: session, status } = useSession();
-  const router = useRouter();
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
   const [activeFilter, setActiveFilter] = useState('All');
   const [searchQuery, setSearchQuery] = useState('');
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [selectedProject, setSelectedProject] = useState(null);
+  const router = useRouter();
 
-  const filteredProjects = projectsData.filter((project) => {
+  useEffect(() => {
+    const currentUser = localStorage.getItem('currentUser');
+    if (!currentUser) {
+      router.push('/login');
+      return;
+    }
+    
+    try {
+      const userData = JSON.parse(currentUser);
+      setUser(userData);
+    } catch (error) {
+      router.push('/login');
+      return;
+    }
+    
+    setLoading(false);
+  }, [router]);
+
+  const filteredProjects = portfolioProjects.filter((project) => {
     const matchesFilter = activeFilter === 'All' || project.category === activeFilter;
     const matchesSearch =
       project.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -82,23 +62,20 @@ export default function AdminProjectsPage() {
     setSelectedProject(null);
   };
 
-  useEffect(() => {
-    if (status === "unauthenticated") {
-      router.push("/login");
-    }
-  }, [status, router]);
-
-  if (status === "loading") {
+  if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-[#F8F9FA]">
-        Loading...
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#E63946] mx-auto mb-4"></div>
+          <p className="text-gray-600">Loading...</p>
+        </div>
       </div>
     );
   }
 
   return (
     <div className="flex flex-col min-h-screen bg-[#F8F9FA]">
-      <TopNavbar />
+      <TopNavbar user={user} />
       <div className="flex flex-1">
         <Sidebar />
         <div className="flex-1 p-4 lg:p-8 pt-20 lg:pt-8 pb-20 lg:pb-8">
@@ -112,7 +89,7 @@ export default function AdminProjectsPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredProjects.map((project, index) => (
               <ProjectCard
-                key={index}
+                key={project.id || index}
                 project={project}
                 onEdit={handleEditProject}
               />

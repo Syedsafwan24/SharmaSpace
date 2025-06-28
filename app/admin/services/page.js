@@ -1,8 +1,7 @@
 'use client';
 
-import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import Sidebar from "@/components/admin/Sidebar";
 import TopNavbar from "@/components/admin/TopNavbar";
 import ServiceHeader from "@/components/admin/services/ServiceHeader";
@@ -10,56 +9,36 @@ import ServiceSearchFilter from "@/components/admin/services/ServiceSearchFilter
 import ServiceCard from "@/components/admin/services/ServiceCard";
 import EditServiceModal from "@/components/admin/services/EditServiceModal";
 import EditServiceForm from "@/components/admin/services/EditServiceForm";
-import Link from 'next/link';
 import { PlusCircle } from 'lucide-react';
-
-const servicesData = [
-  {
-    id: 1,
-    title: 'Residential Design',
-    description: 'Tailored interiors for homes that reflect your personality and enhance your daily living experience.',
-    icon: 'Sofa',
-  },
-  {
-    id: 2,
-    title: 'Commercial Design',
-    description: 'Functional and inspiring workspaces for businesses that boost productivity and reflect your brand identity.',
-    icon: 'Building',
-  },
-  {
-    id: 3,
-    title: 'Hospitality Design',
-    description: 'Creating memorable experiences for hotels and restaurants that leave lasting impressions on guests.',
-    icon: 'Hotel',
-  },
-  {
-    id: 4,
-    title: 'Space Planning',
-    description: 'Optimize your layout for maximum functionality and flow, making the most of every square foot.',
-    icon: 'LayoutGrid',
-  },
-  {
-    id: 5,
-    title: 'Furniture Selection',
-    description: 'Curated furniture choices that blend aesthetics and comfort for a cohesive interior design.',
-    icon: 'Chair',
-  },
-  {
-    id: 6,
-    title: 'Renovation Consultation',
-    description: 'Expert guidance for your renovation projects, ensuring a smooth process and stunning results.',
-    icon: 'Hammer',
-  },
-];
+import { services } from '@/app/data';
 
 export default function AdminServicesPage() {
-  const { data: session, status } = useSession();
-  const router = useRouter();
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [selectedService, setSelectedService] = useState(null);
+  const router = useRouter();
 
-  const filteredServices = servicesData.filter((service) => {
+  useEffect(() => {
+    const currentUser = localStorage.getItem('currentUser');
+    if (!currentUser) {
+      router.push('/login');
+      return;
+    }
+    
+    try {
+      const userData = JSON.parse(currentUser);
+      setUser(userData);
+    } catch (error) {
+      router.push('/login');
+      return;
+    }
+    
+    setLoading(false);
+  }, [router]);
+
+  const filteredServices = services.filter((service) => {
     const matchesSearch = service.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
                           service.description.toLowerCase().includes(searchQuery.toLowerCase());
     return matchesSearch;
@@ -80,19 +59,20 @@ export default function AdminServicesPage() {
     setSelectedService(null);
   };
 
-  useEffect(() => {
-    if (status === "unauthenticated") {
-      router.push("/login");
-    }
-  }, [status, router]);
-
-  if (status === "loading") {
-    return <div className="min-h-screen flex items-center justify-center bg-[#F8F9FA]">Loading...</div>;
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-[#F8F9FA]">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#E63946] mx-auto mb-4"></div>
+          <p className="text-gray-600">Loading...</p>
+        </div>
+      </div>
+    );
   }
 
   return (
     <div className="flex flex-col min-h-screen bg-[#F8F9FA]">
-      <TopNavbar />
+      <TopNavbar user={user} />
       <div className="flex flex-1">
         <Sidebar />
         <div className="flex-1 p-4 lg:p-8 pt-20 lg:pt-8 pb-20 lg:pb-8">

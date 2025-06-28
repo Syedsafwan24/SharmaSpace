@@ -1,14 +1,15 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { Menu, Mail, LogOut, Globe } from 'lucide-react';
-import { signOut } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 
-const TopNavbar = () => {
+const TopNavbar = ({ user }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   const menuRef = useRef(null);
   const buttonRef = useRef(null);
+  const router = useRouter();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -38,11 +39,19 @@ const TopNavbar = () => {
     };
   }, [lastScrollY]);
 
+  const handleLogout = () => {
+    localStorage.removeItem('currentUser');
+    router.push('/login');
+  };
+
   return (
     <div className={`fixed top-0 left-0 right-0 bg-white p-4 flex items-center justify-between shadow-md lg:hidden z-40 transition-transform duration-300 ${
       isVisible ? 'translate-y-0' : '-translate-y-full'
     }`}>
-      <Link href="/admin/dashboard" className="text-xl font-bold text-[#1C1C1C]">Dashboard</Link>
+      <Link href="/admin/dashboard" className="text-xl font-bold text-[#1C1C1C]">
+        Dashboard
+        {user && <span className="text-sm font-normal text-gray-600 ml-2">- {user.name}</span>}
+      </Link>
       <div className="flex items-center gap-4">
         <Link href="/admin/messages" className="text-gray-600 hover:text-[#E63946]">
           <Mail size={24} />
@@ -68,7 +77,7 @@ const TopNavbar = () => {
             <li>
               <button
                 onClick={() => {
-                  signOut({ callbackUrl: '/login' });
+                  handleLogout();
                   setIsMenuOpen(false);
                 }}
                 className="flex items-center gap-2 text-gray-700 hover:text-[#E63946] w-full text-left"

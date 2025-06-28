@@ -1,8 +1,7 @@
 'use client';
 
-import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import Sidebar from "@/components/admin/Sidebar";
 import TopNavbar from "@/components/admin/TopNavbar";
 import TestimonialHeader from "@/components/admin/testimonials/TestimonialHeader";
@@ -10,18 +9,37 @@ import TestimonialSearchFilter from "@/components/admin/testimonials/Testimonial
 import TestimonialCard from "@/components/admin/testimonials/TestimonialCard";
 import EditTestimonialModal from "@/components/admin/testimonials/EditTestimonialModal";
 import EditTestimonialForm from "@/components/admin/testimonials/EditTestimonialForm";
-import { testimonialsData } from "@/app/data/testimonialsData";
 import { PlusCircle } from 'lucide-react';
+import { testimonials } from '@/app/data';
 
 export default function AdminTestimonials() {
-  const { data: session, status } = useSession();
-  const router = useRouter();
-  const [testimonials, setTestimonials] = useState(testimonialsData);
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [testimonialsData, setTestimonialsData] = useState(testimonials);
   const [searchTerm, setSearchTerm] = useState('');
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [selectedTestimonial, setSelectedTestimonial] = useState(null);
+  const router = useRouter();
 
-  const filteredTestimonials = testimonials.filter(
+  useEffect(() => {
+    const currentUser = localStorage.getItem('currentUser');
+    if (!currentUser) {
+      router.push('/login');
+      return;
+    }
+    
+    try {
+      const userData = JSON.parse(currentUser);
+      setUser(userData);
+    } catch (error) {
+      router.push('/login');
+      return;
+    }
+    
+    setLoading(false);
+  }, [router]);
+
+  const filteredTestimonials = testimonialsData.filter(
     (testimonial) =>
       testimonial.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       testimonial.location.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -45,22 +63,23 @@ export default function AdminTestimonials() {
 
   const handleDelete = (id) => {
     console.log('Delete testimonial with ID:', id);
-    setTestimonials(testimonials.filter((t) => t.id !== id));
+    setTestimonialsData(testimonialsData.filter((t) => t.id !== id));
   };
 
-  useEffect(() => {
-    if (status === "unauthenticated") {
-      router.push("/login");
-    }
-  }, [status, router]);
-
-  if (status === "loading") {
-    return <div className="min-h-screen flex items-center justify-center bg-[#F8F9FA]">Loading...</div>;
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-[#F8F9FA]">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#E63946] mx-auto mb-4"></div>
+          <p className="text-gray-600">Loading...</p>
+        </div>
+      </div>
+    );
   }
 
   return (
     <div className="flex flex-col min-h-screen bg-[#F8F9FA]">
-      <TopNavbar />
+      <TopNavbar user={user} />
       <div className="flex flex-1">
         <Sidebar />
         <div className="flex-1 p-4 lg:p-8 pt-20 lg:pt-8 pb-20 lg:pb-8">

@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { portfolioProjects } from '@/data/portfolioData'; // Import portfolioProjects
+import { portfolioProjects } from '@/app/data';
 
 const CtaSection = ({ currentProjectSlug, currentProjectCategory }) => {
 	// Filter for similar projects based on category, excluding the current project
@@ -30,7 +30,7 @@ const CtaSection = ({ currentProjectSlug, currentProjectCategory }) => {
 						>
 							<div className='relative aspect-[4/3] rounded-lg overflow-hidden mb-4'>
 								<Image
-									src={project.image}
+									src={project.image?.url || project.image}
 									alt={project.title}
 									fill
 									className='object-cover transition-transform duration-300 group-hover:scale-105'

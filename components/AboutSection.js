@@ -1,6 +1,7 @@
 'use client';
 import React, { useEffect, useRef } from 'react';
 import Image from 'next/image';
+import { companyStats, companyInfo } from '@/app/data';
 
 const AboutSection = () => {
 	const sectionRef = useRef(null);
@@ -36,6 +37,26 @@ const AboutSection = () => {
 		return () => observer.disconnect();
 	}, []);
 
+	// Get stats from centralized data
+	const statsData = [
+		{
+			stat: companyStats.find(s => s.id === 'projects-completed')?.displayValue || '150+',
+			label: 'Projects Completed'
+		},
+		{
+			stat: companyStats.find(s => s.id === 'years-experience')?.displayValue || '10+',
+			label: 'Years Experience'
+		},
+		{
+			stat: companyStats.find(s => s.id === 'happy-clients')?.displayValue || '500+',
+			label: 'Happy Clients'
+		},
+		{
+			stat: companyInfo?.founded || '2013',
+			label: 'Year Established'
+		}
+	];
+
 	return (
 		<div className='bg-gray-50'>
 			<section
@@ -51,10 +72,7 @@ const AboutSection = () => {
 							</h1>
 							<div className='space-y-4 md:space-y-6'>
 								<p className='text-base md:text-lg leading-relaxed text-gray-600'>
-									At Sharma Space, we believe in creating interiors that are not
-									just beautiful but also functional. With over 10 years of
-									experience, we've transformed 150+ spaces into dream homes and
-									offices.
+									{companyInfo?.mission || 'At Sharma Space, we believe in creating interiors that are not just beautiful but also functional. With over 10 years of experience, we\'ve transformed 150+ spaces into dream homes and offices.'}
 								</p>
 								<p className='text-base md:text-lg leading-relaxed text-gray-600'>
 									Our design philosophy centers around understanding your unique
@@ -68,12 +86,7 @@ const AboutSection = () => {
 								ref={statsRef}
 								className='grid grid-cols-2 gap-4 md:gap-8 pt-4'
 							>
-								{[
-									{ stat: '150+', label: 'Projects Completed' },
-									{ stat: '10+', label: 'Years Experience' },
-									{ stat: '500+', label: 'Happy Clients' },
-									{ stat: '2013', label: 'Year Established' },
-								].map(({ stat, label }, i) => (
+								{statsData.map(({ stat, label }, i) => (
 									<div key={i}>
 										<div className='text-3xl md:text-4xl font-bold text-red-600 mb-1 md:mb-2 leading-none'>
 											{stat}

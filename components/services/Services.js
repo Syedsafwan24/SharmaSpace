@@ -2,26 +2,20 @@
 
 import React from 'react';
 import { Sofa, Building2, Hotel, ArrowRight } from 'lucide-react';
+import { services } from '@/app/data';
 
 const Services = () => {
-	const services = [
-		{
-			icon: <Sofa size={28} className='text-red-600' />,
-			title: 'Residential Design',
-			description:
-				'Tailored interiors for homes that reflect your personality.',
-		},
-		{
-			icon: <Building2 size={28} className='text-red-600' />,
-			title: 'Commercial Design',
-			description: 'Functional and inspiring workspaces for businesses.',
-		},
-		{
-			icon: <Hotel size={28} className='text-red-600' />,
-			title: 'Hospitality Design',
-			description: 'Creating memorable experiences for hotels and restaurants.',
-		},
-	];
+	// Get the first 3 services for the homepage
+	const homeServices = services.slice(0, 3);
+
+	// Map service icons
+	const iconMap = {
+		'Home': Sofa,
+		'Building': Building2,
+		'Hotel': Hotel,
+		'Sofa': Sofa,
+		'Building2': Building2
+	};
 
 	return (
 		<section className='bg-gray-100 py-20'>
@@ -39,21 +33,26 @@ const Services = () => {
 
 				{/* Services Grid - Cards Aligned Left */}
 				<div className='grid grid-cols-1 md:grid-cols-3 gap-8'>
-					{services.map((service, index) => (
-						<div
-							key={index}
-							className='bg-white rounded-lg shadow-md px-6 py-10 group hover:shadow-xl transition-shadow duration-300'
-						>
-							<div className='mb-4'>{service.icon}</div>
-							<h3 className='text-xl font-semibold text-gray-900 mb-3'>
-								{service.title}
-							</h3>
-							<p className='text-gray-600 mb-6'>{service.description}</p>
-							<button className='text-red-600 font-medium flex items-center gap-1 hover:text-red-700 transition-colors duration-300'>
-								Learn More <ArrowRight size={16} />
-							</button>
-						</div>
-					))}
+					{homeServices.map((service, index) => {
+						const IconComponent = iconMap[service.icon] || Sofa;
+						return (
+							<div
+								key={service.id}
+								className='bg-white rounded-lg shadow-md px-6 py-10 group hover:shadow-xl transition-shadow duration-300'
+							>
+								<div className='mb-4'>
+									<IconComponent size={28} className='text-red-600' />
+								</div>
+								<h3 className='text-xl font-semibold text-gray-900 mb-3'>
+									{service.title}
+								</h3>
+								<p className='text-gray-600 mb-6'>{service.shortDescription || service.description}</p>
+								<button className='text-red-600 font-medium flex items-center gap-1 hover:text-red-700 transition-colors duration-300'>
+									Learn More <ArrowRight size={16} />
+								</button>
+							</div>
+						);
+					})}
 				</div>
 
 				{/* CTA Button - Centered */}

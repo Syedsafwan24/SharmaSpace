@@ -14,7 +14,7 @@ const ProjectCard = ({ project }) => {
 			{/* Image with hover effect - unchanged */}
 			<div className='absolute inset-0 h-full w-full overflow-hidden'>
 				<Image
-					src={project.image}
+					src={project.image?.url || project.image}
 					alt={project.title}
 					fill
 					className='object-cover transition-all duration-500 group-hover:scale-105'
@@ -34,7 +34,7 @@ const ProjectCard = ({ project }) => {
 
 				<div className='min-h-[80px] mb-4'>
 					<p className='text-sm leading-relaxed line-clamp-3 drop-shadow-sm whitespace-pre-line'>
-						{project.description}
+						{project.shortDescription || project.description}
 					</p>
 				</div>
 

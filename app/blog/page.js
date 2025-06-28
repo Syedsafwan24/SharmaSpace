@@ -22,7 +22,7 @@ export default function Blog() {
 					<p className='text-lg text-gray-600 max-w-2xl mx-auto mb-12'>
 						Latest trends, tips, and insights from our interior design experts.
 					</p>
-					<div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'>
+					<div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 text-left'>
 						{blogPosts.map((post) => (
 							<BlogCard key={post.slug} post={post} />
 						))}

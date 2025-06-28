@@ -27,9 +27,11 @@ export async function POST(request) {
       },
     });
 
-    return NextResponse.json({ message: 'User registered successfully.', user: newUser }, { status: 201 });
+    return NextResponse.json({ message: 'User registered successfully.', user: { id: newUser.id, email: newUser.email, name: newUser.name } }, { status: 201 });
   } catch (error) {
     console.error('Registration error:', error);
     return NextResponse.json({ message: 'Something went wrong.' }, { status: 500 });
+  } finally {
+    await prisma.$disconnect();
   }
 }

@@ -1,0 +1,77 @@
+{
+  "categories": [
+    {
+      "id": "residential",
+      "name": "Residential",
+      "slug": "residential",
+      "description": "Home interior design projects across Bangalore and India",
+      "metaTitle": "Residential Interior Design Bangalore | Home Interiors | Sharma Space",
+      "metaDescription": "Residential interior design services in Bangalore. Transform your home with our expert designers. View our residential portfolio.",
+      "icon": "Home",
+      "color": "#E63946",
+      "projectCount": 45,
+      "featured": true,
+      "services": [
+        "Living Room Design",
+        "Bedroom Design", 
+        "Kitchen Design",
+        "Bathroom Design",
+        "Home Office Design"
+      ],
+      "priceRange": "₹8,00,000 - ₹50,00,000",
+      "averageDuration": "2-4 months",
+      "keywords": ["residential interior design bangalore", "home interior design", "apartment design", "villa interior"]
+    },
+    {
+      "id": "commercial",
+      "name": "Commercial",
+      "slug": "commercial", 
+      "description": "Office and commercial space interior design in Bangalore",
+      "metaTitle": "Commercial Interior Design Bangalore | Office Interiors | Sharma Space",
+      "metaDescription": "Commercial interior design services in Bangalore. Office design, retail spaces, co-working areas. Professional commercial interiors.",
+      "icon": "Building",
+      "color": "#F97316",
+      "projectCount": 28,
+      "featured": true,
+      "services": [
+        "Office Design",
+        "Retail Space Design",
+        "Co-working Spaces",
+        "Restaurant Design",
+        "Showroom Design"
+      ],
+      "priceRange": "₹15,00,000 - ₹1,00,00,000",
+      "averageDuration": "3-6 months",
+      "keywords": ["commercial interior design bangalore", "office interior design", "retail design", "workspace design"]
+    },
+    {
+      "id": "hospitality",
+      "name": "Hospitality",
+      "slug": "hospitality",
+      "description": "Hotel and restaurant interior design projects",
+      "metaTitle": "Hospitality Interior Design | Hotel Restaurant Interiors | Bangalore",
+      "metaDescription": "Hospitality interior design in Bangalore. Hotel, restaurant, cafe interior design services. Create memorable guest experiences.",
+      "icon": "Hotel",
+      "color": "#8B5CF6",
+      "projectCount": 12,
+      "featured": false,
+      "services": [
+        "Hotel Design",
+        "Restaurant Design",
+        "Cafe Design",
+        "Bar Design",
+        "Resort Design"
+      ],
+      "priceRange": "₹25,00,000 - ₹2,00,00,000",
+      "averageDuration": "4-8 months",
+      "keywords": ["hospitality interior design", "hotel interior design bangalore", "restaurant design", "cafe interior"]
+    }
+  ],
+  "metadata": {
+    "version": "1.0.0",
+    "lastUpdated": "2024-05-15T10:00:00Z",
+    "totalCategories": 3,
+    "description": "Portfolio categories for Sharma Space projects",
+    "seoCompliance": "Service-focused keyword optimization for Bangalore market"
+  }
+}

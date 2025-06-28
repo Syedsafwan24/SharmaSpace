@@ -1,0 +1,120 @@
+{
+  "authors": [
+    {
+      "id": "nisha-sharma",
+      "name": "Nisha Sharma",
+      "slug": "nisha-sharma",
+      "title": "Interior Design Specialist",
+      "specialization": "Residential Design & Space Planning",
+      "credentials": "B.Arch, 8+ years experience",
+      "experience": "8+ years",
+      "location": "Bangalore, India",
+      "bio": "Lead interior designer at Sharma Space with expertise in modern residential design across Bangalore. Specializes in sustainable design solutions and space optimization for urban homes.",
+      "image": {
+        "url": "/images/author-nisha.png",
+        "alt": "Nisha Sharma interior designer Bangalore Sharma Space",
+        "width": 300,
+        "height": 300
+      },
+      "social": {
+        "linkedin": "https://linkedin.com/in/nisha-sharma-interior",
+        "instagram": "https://instagram.com/nisha.designs",
+        "email": "nisha@sharmaspace.in"
+      },
+      "expertise": [
+        "Residential Interior Design",
+        "Space Planning",
+        "Sustainable Design",
+        "Color Psychology",
+        "Bangalore Architecture"
+      ],
+      "projects": 45,
+      "articlesCount": 12,
+      "certifications": [
+        "Bachelor of Architecture",
+        "Certified Interior Designer",
+        "Sustainable Design Specialist"
+      ],
+      "awards": [
+        "Best Residential Design 2023 - Bangalore Design Awards",
+        "Sustainable Design Excellence 2022"
+      ],
+      "seo": {
+        "focusKeyword": "interior designer bangalore nisha sharma",
+        "schema": {
+          "@type": "Person",
+          "name": "Nisha Sharma",
+          "jobTitle": "Interior Design Specialist",
+          "worksFor": {
+            "@type": "Organization",
+            "name": "Sharma Space"
+          },
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Bangalore",
+            "addressCountry": "India"
+          }
+        }
+      }
+    },
+    {
+      "id": "vikram-patel",
+      "name": "Vikram Patel",
+      "slug": "vikram-patel",
+      "title": "Color Expert & Design Consultant",
+      "specialization": "Color Psychology & Commercial Design",
+      "credentials": "M.Des, Color Psychology Certified",
+      "experience": "10+ years",
+      "location": "Bangalore, India",
+      "bio": "Color specialist with 10+ years experience in residential and commercial projects across Bangalore. Expert in color psychology and its application in interior design.",
+      "image": {
+        "url": "/images/author-vikram.png",
+        "alt": "Vikram Patel color expert interior designer Bangalore",
+        "width": 300,
+        "height": 300
+      },
+      "social": {
+        "linkedin": "https://linkedin.com/in/vikram-patel-color",
+        "instagram": "https://instagram.com/vikram.colors",
+        "email": "vikram@sharmaspace.in"
+      },
+      "expertise": [
+        "Color Psychology",
+        "Commercial Interior Design",
+        "Brand Integration",
+        "Lighting Design",
+        "Material Selection"
+      ],
+      "projects": 60,
+      "articlesCount": 8,
+      "certifications": [
+        "Master of Design",
+        "Color Psychology Certification",
+        "Commercial Design Specialist"
+      ],
+      "awards": [
+        "Best Commercial Design 2023 - Karnataka Interior Awards",
+        "Color Innovation Award 2022"
+      ],
+      "seo": {
+        "focusKeyword": "color expert interior designer bangalore",
+        "schema": {
+          "@type": "Person",
+          "name": "Vikram Patel",
+          "jobTitle": "Color Expert & Design Consultant",
+          "worksFor": {
+            "@type": "Organization", 
+            "name": "Sharma Space"
+          }
+        }
+      }
+    }
+  ],
+  "metadata": {
+    "version": "1.0.0",
+    "lastUpdated": "2024-05-15T10:00:00Z",
+    "totalAuthors": 2,
+    "description": "Author profiles for Sharma Space blog content",
+    "seoCompliance": "E-E-A-T compliant author credentials and expertise"
+  }
+}

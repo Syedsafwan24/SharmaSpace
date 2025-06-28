@@ -7,6 +7,7 @@ import Image from 'next/image';
 import { FaQuoteLeft } from 'react-icons/fa';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import ReactStars from 'react-stars';
+import { testimonials } from '@/app/data';
 
 const TestimonialCard = ({ testimonial }) => {
 	const [expanded, setExpanded] = useState(false);
@@ -47,8 +48,8 @@ const TestimonialCard = ({ testimonial }) => {
 				<div className='flex items-center gap-4'>
 					<div className='w-12 h-12 rounded-full overflow-hidden border-2 border-white shadow-sm'>
 						<Image
-							src={testimonial.image}
-							alt={testimonial.name}
+							src={testimonial.image?.url || testimonial.image}
+							alt={testimonial.fullName || testimonial.name}
 							width={48}
 							height={48}
 							className='w-full h-full object-cover'
@@ -56,7 +57,7 @@ const TestimonialCard = ({ testimonial }) => {
 					</div>
 					<div className='flex-1'>
 						<div className='font-semibold text-gray-900'>
-							{testimonial.name}
+							{testimonial.fullName || testimonial.name}
 						</div>
 						<div className='text-sm text-gray-500'>{testimonial.location}</div>
 					</div>
@@ -66,7 +67,7 @@ const TestimonialCard = ({ testimonial }) => {
 						color1={'#e5e7eb'}
 						color2={'#fbbf24'}
 						edit={false}
-						value={5}
+						value={testimonial.rating || 5}
 					/>
 				</div>
 			</div>
@@ -75,44 +76,6 @@ const TestimonialCard = ({ testimonial }) => {
 };
 
 const Testimonials = () => {
-	const testimonials = [
-		{
-			text: `Sharma Space transformed our home into a dream! Their attention to detail is unmatched. Every corner now reflects our personality while maintaining functionality.`,
-			name: 'Priya S.',
-			location: 'Mumbai',
-			image:
-				'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80',
-		},
-		{
-			text: `They created a workspace that inspires creativity. The team understood our needs perfectly.`,
-			name: 'Rahul M.',
-			location: 'Delhi',
-			image:
-				'https://images.unsplash.com/photo-1494790108755-2616b612b977?auto=format&fit=crop&w=100&q=80',
-		},
-		{
-			text: `Delivered within budget, exceeded expectations with final result.`,
-			name: 'Ananya K.',
-			location: 'Bangalore',
-			image:
-				'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80',
-		},
-		{
-			text: `Exceptional service from start to finish. Highly recommend Sharma Space.`,
-			name: 'Vikram P.',
-			location: 'Hyderabad',
-			image:
-				'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=100&q=80',
-		},
-		{
-			text: `Our guests love the new look. Elegant, modern, and inviting.`,
-			name: 'Deepika R.',
-			location: 'Chennai',
-			image:
-				'https://images.unsplash.com/photo-1571508601792-53c25e4fe732?auto=format&fit=crop&w=800&q=80',
-		},
-	];
-
 	const isCarousel = testimonials.length > 3;
 	const [sliderRef, instanceRef] = useKeenSlider({
 		loop: true,
@@ -181,7 +144,7 @@ const Testimonials = () => {
 					<div className='relative'>
 						<div ref={sliderRef} className='keen-slider py-4'>
 							{testimonials.map((testimonial, index) => (
-								<div key={index} className='keen-slider__slide h-auto px-2'>
+								<div key={testimonial.id} className='keen-slider__slide h-auto px-2'>
 									<TestimonialCard testimonial={testimonial} />
 								</div>
 							))}
@@ -207,7 +170,7 @@ const Testimonials = () => {
 				) : (
 					<div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6'>
 						{testimonials.map((testimonial, index) => (
-							<TestimonialCard key={index} testimonial={testimonial} />
+							<TestimonialCard key={testimonial.id} testimonial={testimonial} />
 						))}
 					</div>
 				)}

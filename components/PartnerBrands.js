@@ -1,18 +1,13 @@
 "use client";
 import React, { useRef, useEffect } from "react";
 import gsap from "gsap";
-
-const brands = [
-  'ASIAN PAINTS',
-  'HAFELE',
-  'JAQUAR',
-  'GODREJ',
-  'SAINT-GOBAIN',
-  'KOHLER',
-];
+import { partnerBrands } from '@/app/data';
 
 const PartnerBrands = () => {
   const rowRef = useRef(null);
+
+  // Extract brand names from the centralized data
+  const brands = partnerBrands.map(brand => brand.name);
 
   useEffect(() => {
     const row = rowRef.current;
@@ -60,4 +55,4 @@ const PartnerBrands = () => {
   );
 };
 
-export default PartnerBrands; 
+export default PartnerBrands;

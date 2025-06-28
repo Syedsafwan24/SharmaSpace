@@ -38,7 +38,7 @@ const DesignInsights = () => {
 							<div className='bg-white rounded-2xl shadow-lg overflow-hidden flex flex-col hover:shadow-xl transition-shadow duration-300 cursor-pointer h-full'>
 								<div className='relative'>
 									<Image
-										src={article.image}
+										src={article.image.url}
 										alt={article.title}
 										width={500}
 										height={320} // Ensure optimal aspect ratio for image

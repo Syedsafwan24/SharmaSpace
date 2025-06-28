@@ -1,4 +1,5 @@
 import React from 'react';
+import { companyInfo } from '@/app/data';
 
 const OurMissionVision = () => (
   <section className="bg-[#F5F6F8] py-20 w-full">
@@ -9,14 +10,14 @@ const OurMissionVision = () => (
         <div className="bg-white rounded-lg shadow p-8 text-left">
           <h3 className="text-2xl font-bold text-red-600 mb-4">Mission</h3>
           <p className="text-gray-700 text-base leading-relaxed">
-            To create functional, beautiful spaces that enhance the lives of our clients while maintaining the highest standards of design excellence and professional integrity.
+            {companyInfo?.mission || 'To create functional, beautiful spaces that enhance the lives of our clients while maintaining the highest standards of design excellence and professional integrity.'}
           </p>
         </div>
         {/* Vision */}
         <div className="bg-white rounded-lg shadow p-8 text-left">
           <h3 className="text-2xl font-bold text-red-600 mb-4">Vision</h3>
           <p className="text-gray-700 text-base leading-relaxed">
-            To be the leading interior design firm known for innovative, sustainable, and client-centered design solutions that transform spaces into extraordinary environments.
+            {companyInfo?.vision || 'To be the leading interior design firm known for innovative, sustainable, and client-centered design solutions that transform spaces into extraordinary environments.'}
           </p>
         </div>
       </div>
@@ -24,4 +25,4 @@ const OurMissionVision = () => (
   </section>
 );
 
-export default OurMissionVision; 
+export default OurMissionVision;

@@ -2,16 +2,16 @@
 
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
-import Link from 'next/link'; // Import Link component
+import Link from 'next/link';
 
 const ProjectDetailsContent = ({ project }) => {
 	const [displayImage, setDisplayImage] = useState(
-		project.coverImage || project.image
+		project.coverImage?.url || project.coverImage || project.image?.url || project.image
 	);
 	const [activeThumbnailIndex, setActiveThumbnailIndex] = useState(-1);
 
 	useEffect(() => {
-		setDisplayImage(project.coverImage || project.image);
+		setDisplayImage(project.coverImage?.url || project.coverImage || project.image?.url || project.image);
 		setActiveThumbnailIndex(-1);
 	}, [project]);
 
@@ -41,7 +41,7 @@ const ProjectDetailsContent = ({ project }) => {
 						{/* Main project image as a thumbnail (optional, but good for consistency) */}
 						<button
 							onClick={() =>
-								handleThumbnailClick(project.coverImage || project.image, -1)
+								handleThumbnailClick(project.coverImage?.url || project.coverImage || project.image?.url || project.image, -1)
 							}
 							className={`relative aspect-square rounded-lg overflow-hidden border-2 transition-all duration-200 ${
 								activeThumbnailIndex === -1
@@ -50,7 +50,7 @@ const ProjectDetailsContent = ({ project }) => {
 							}`}
 						>
 							<Image
-								src={project.image}
+								src={project.image?.url || project.image}
 								alt={`${project.title} - Main View`}
 								fill
 								className='object-cover'
@@ -61,7 +61,7 @@ const ProjectDetailsContent = ({ project }) => {
 						{project.galleryImages.slice(0, 3).map((image, index) => (
 							<button
 								key={index}
-								onClick={() => handleThumbnailClick(image, index)}
+								onClick={() => handleThumbnailClick(image.url || image, index)}
 								className={`relative aspect-square rounded-lg overflow-hidden border-2 transition-all duration-200 ${
 									activeThumbnailIndex === index
 										? 'border-red-600 ring-2 ring-red-600 ring-opacity-50'
@@ -69,7 +69,7 @@ const ProjectDetailsContent = ({ project }) => {
 								}`}
 							>
 								<Image
-									src={image}
+									src={image.url || image}
 									alt={`Gallery thumbnail ${index + 1}`}
 									fill
 									className='object-cover'

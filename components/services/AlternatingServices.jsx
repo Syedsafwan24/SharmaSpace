@@ -1,44 +1,24 @@
 // components/services/AlternatingServices.jsx
 import Image from 'next/image';
+import { services } from '@/app/data';
 
 const AlternatingServices = () => {
-	const services = [
-		{
-			title: 'Residential Design',
-			description: [
-				'From cozy apartments to sprawling villas, we design homes that feel uniquely yours. Our residential design service covers everything from space planning to furniture selection, creating interiors that reflect your personality and enhance your lifestyle.',
-				"We consider how you live, what inspires you, and what functionalities you need, then translate these insights into thoughtfully designed spaces that you'll love coming home to.",
-			],
-			image: '/images/resident.jpg',
-			alt: 'Beautiful residential interior design',
-			reverse: false,
-		},
-		{
-			title: 'Commercial Design',
-			description: [
-				"Creating workspaces that boost productivity and creativity is our specialty. We understand that your office environment affects your team's performance and your brand's perception.",
-				'Our commercial design services include office layouts, corporate branding integration, ergonomic workstations, collaborative spaces, and reception areas that make lasting impressions on clients and visitors.',
-			],
-			image: '/images/commercial.jpg',
-			alt: 'Modern commercial office design',
-			reverse: true,
-		},
-		{
-			title: 'Hospitality Design',
-			description: [
-				"Designing hotels and restaurants that leave a lasting impression on guests is an art we've mastered. Our hospitality designs focus on creating memorable experiences through thoughtful spatial planning, lighting, acoustics, and material selection.",
-				'We help establish your unique identity in the competitive hospitality industry, creating environments that guests will remember and want to return to again and again.',
-			],
-			image: '/images/hospital.jpg',
-			alt: 'Elegant hospitality space design',
-			reverse: false,
-		},
-	];
+	// Get the first 3 services for the alternating layout
+	const alternatingServices = services.slice(0, 3).map((service, index) => ({
+		title: service.title,
+		description: [
+			service.description,
+			service.features ? service.features.slice(0, 2).join('. ') + '.' : 'We help establish your unique identity in the competitive market, creating environments that clients will remember and want to return to again and again.'
+		],
+		image: service.image?.url || '/images/resident.jpg', // Fallback image
+		alt: `${service.title} interior design`,
+		reverse: index % 2 === 1,
+	}));
 
 	return (
 		<section className='py-16 bg-white'>
 			<div className='max-w-6xl mx-auto px-6 sm:px-8'>
-				{services.map((service, index) => (
+				{alternatingServices.map((service, index) => (
 					<div
 						key={index}
 						className={`flex flex-col ${

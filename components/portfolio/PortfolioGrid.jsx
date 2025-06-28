@@ -2,7 +2,7 @@
 'use client';
 
 import ProjectCard from './ProjectCard';
-import { portfolioProjects } from '@/data/portfolioData';
+import { portfolioProjects } from '@/app/data';
 
 const PortfolioGrid = ({ activeFilter = 'all' }) => {
 	// Filter projects (case-insensitive)

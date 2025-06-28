@@ -1,11 +1,19 @@
 import React from 'react';
+import { portfolioProjects } from '@/app/data';
 
 const ProjectCategories = () => {
-  const categories = [
-    { name: 'Residential', percentage: 50, color: '#E63946' },
-    { name: 'Commercial', percentage: 33, color: '#E63946' },
-    { name: 'Hospitality', percentage: 17, color: '#E63946' },
-  ];
+  // Calculate category distribution from actual data
+  const totalProjects = portfolioProjects.length;
+  const categoryCount = portfolioProjects.reduce((acc, project) => {
+    acc[project.category] = (acc[project.category] || 0) + 1;
+    return acc;
+  }, {});
+
+  const categories = Object.entries(categoryCount).map(([name, count]) => ({
+    name,
+    percentage: Math.round((count / totalProjects) * 100),
+    color: '#E63946'
+  }));
 
   return (
     <div className="bg-white p-6 rounded-lg shadow-md h-full">

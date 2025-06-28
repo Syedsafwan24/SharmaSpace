@@ -1,23 +1,13 @@
 import React from 'react';
+import { contactMessages } from '@/app/data';
 
 const RecentMessages = () => {
-  const messages = [
-    {
-      sender: 'Aditya Sharma',
-      time: 'May 8, 10:22 AM',
-      text: "We're looking to renovate our living room and kitchen space. Would love to schedule a...",
-    },
-    {
-      sender: 'Priya Mehta',
-      time: 'May 8, 10:22 AM',
-      text: "I'm interested in your commercial design services for my new office space in Bandra. Please share some...",
-    },
-    {
-      sender: 'Rajesh Kumar',
-      time: 'May 8, 10:22 AM',
-      text: "We recently purchased a 3BHK apartment in South Mumbai and are looking for interior design service...",
-    },
-  ];
+  // Get the first 3 messages
+  const messages = contactMessages.slice(0, 3).map(msg => ({
+    sender: msg.name,
+    time: msg.dateFormatted || msg.date,
+    text: msg.text || msg.message,
+  }));
 
   return (
     <div className="bg-white p-6 rounded-lg shadow-md h-full">
@@ -30,7 +20,7 @@ const RecentMessages = () => {
               <p className="font-semibold text-gray-800">{message.sender}</p>
               <p className="text-xs text-gray-500">{message.time}</p>
             </div>
-            <p className="text-sm text-gray-700 leading-relaxed">{message.text}</p>
+            <p className="text-sm text-gray-700 leading-relaxed line-clamp-2">{message.text}</p>
           </div>
         ))}
       </div>

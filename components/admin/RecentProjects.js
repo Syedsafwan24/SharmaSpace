@@ -1,29 +1,14 @@
 import React from 'react';
 import Image from 'next/image';
+import { portfolioProjects } from '@/app/data';
 
 const RecentProjects = () => {
-  const projects = [
-    {
-      title: 'Modern Apartment in Mumbai',
-      category: 'Residential',
-      image: '/images/resident.jpg',
-    },
-    {
-      title: 'Luxury Villa in Delhi',
-      category: 'Residential',
-      image: '/images/bedroom-suite.jpg',
-    },
-    {
-      title: 'Co-Working Space in Bangalore',
-      category: 'Commercial',
-      image: '/images/commercial.jpg',
-    },
-    {
-      title: 'Urban Loft Renovation',
-      category: 'Residential',
-      image: '/images/sofa.jpg',
-    },
-  ];
+  // Get the first 4 projects
+  const projects = portfolioProjects.slice(0, 4).map(project => ({
+    title: project.title,
+    category: project.category,
+    image: project.image?.url || project.image,
+  }));
 
   return (
     <div className="bg-white p-6 rounded-lg shadow-md h-full">
@@ -42,7 +27,7 @@ const RecentProjects = () => {
               />
             </div>
             <div>
-              <p className="font-semibold text-gray-800">{project.title}</p>
+              <p className="font-semibold text-gray-800 text-sm line-clamp-1">{project.title}</p>
               <p className="text-sm text-gray-500">{project.category}</p>
             </div>
           </div>

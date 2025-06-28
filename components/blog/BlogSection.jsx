@@ -1,7 +1,6 @@
 import React from 'react';
-import Image from 'next/image';
-import Link from 'next/link'; // Import the Link component from Next.js
 import BlogCard from './BlogCard';
+import { blogPosts } from '@/app/data';
 
 const BlogSection = () => {
 	// Get the first 3 blog posts
@@ -21,8 +20,8 @@ const BlogSection = () => {
 				</div>
 
 				<div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'>
-					{blogPosts.map((post, index) => (
-						<BlogCard key={index} post={post} />
+					{featuredPosts.map((post, index) => (
+						<BlogCard key={post.slug || index} post={post} />
 					))}
 				</div>
 			</div>

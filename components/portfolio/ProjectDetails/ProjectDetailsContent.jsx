@@ -6,12 +6,20 @@ import Link from 'next/link';
 
 const ProjectDetailsContent = ({ project }) => {
 	const [displayImage, setDisplayImage] = useState(
-		project.coverImage?.url || project.coverImage || project.image?.url || project.image
+		project.coverImage?.url ||
+			project.coverImage ||
+			project.image?.url ||
+			project.image
 	);
 	const [activeThumbnailIndex, setActiveThumbnailIndex] = useState(-1);
 
 	useEffect(() => {
-		setDisplayImage(project.coverImage?.url || project.coverImage || project.image?.url || project.image);
+		setDisplayImage(
+			project.coverImage?.url ||
+				project.coverImage ||
+				project.image?.url ||
+				project.image
+		);
 		setActiveThumbnailIndex(-1);
 	}, [project]);
 
@@ -41,7 +49,13 @@ const ProjectDetailsContent = ({ project }) => {
 						{/* Main project image as a thumbnail (optional, but good for consistency) */}
 						<button
 							onClick={() =>
-								handleThumbnailClick(project.coverImage?.url || project.coverImage || project.image?.url || project.image, -1)
+								handleThumbnailClick(
+									project.coverImage?.url ||
+										project.coverImage ||
+										project.image?.url ||
+										project.image,
+									-1
+								)
 							}
 							className={`relative aspect-square rounded-lg overflow-hidden border-2 transition-all duration-200 ${
 								activeThumbnailIndex === -1

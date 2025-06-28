@@ -2,6 +2,7 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link'; // Import the Link component from Next.js
 import BlogCard from './BlogCard';
+import { blogPosts } from '@/app/data/blogUnifiedData';
 
 const BlogSection = () => {
 	// Get the first 3 blog posts

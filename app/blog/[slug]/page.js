@@ -1,21 +1,21 @@
-import { getBlogPostBySlug, getAllBlogSlugs } from '@/app/data/blogPosts';
+import blogUnifiedData from '@/app/data/blog/blogUnifiedData';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import BlogPostHero from '@/components/blog/BlogPostHero';
 import AuthorBio from '@/components/blog/AuthorBio';
 import BlogContent from '@/components/blog/BlogContent';
 import ShareButtons from '@/components/blog/ShareButtons';
-import RelatedTags from '@/components/blog/RelatedTags'; // Import the RelatedTags component
+import RelatedTags from '@/components/blog/RelatedTags';
 import RelatedArticlesSection from '@/components/blog/RelatedArticlesSection';
 // import NewsletterSection from '@/components/blog/NewsletterSection';
 
 export async function generateStaticParams() {
-	return getAllBlogSlugs();
+	return blogUnifiedData.posts.map((post) => ({ slug: post.slug }));
 }
 
 export default function BlogPostPage({ params }) {
 	const { slug } = params;
-	const post = getBlogPostBySlug(slug);
+	const post = blogUnifiedData.posts.find((post) => post.slug === slug);
 
 	if (!post) {
 		return <div>Post not found</div>;
@@ -37,10 +37,7 @@ export default function BlogPostPage({ params }) {
 					<AuthorBio author={post.author} />
 					<BlogContent content={post.content} />
 					<ShareButtons title={post.title} />
-
-					{/* --- FIX HERE: Changed 'post.tags' to 'post.relatedTags' --- */}
 					<RelatedTags tags={post.relatedTags} />
-					{/* ----------------------------------------------------------- */}
 				</article>
 			</main>
 

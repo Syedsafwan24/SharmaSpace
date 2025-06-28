@@ -11,58 +11,7 @@ import BlogCard from '@/components/admin/blog-posts/BlogCard';
 import EditBlogModal from '@/components/admin/blog-posts/EditBlogModal';
 import EditBlogForm from '@/components/admin/blog-posts/EditBlogForm';
 import { PlusCircle } from 'lucide-react';
-
-const blogPostsData = [
-	{
-		id: 1,
-		image: '/images/Desgin-Insights/10.webp',
-		category: 'TRENDS',
-		date: 'May 15, 2024',
-		title: '5 Trends in Modern Interior Design for 2024',
-		description:
-			'Discover the latest trends shaping modern interior spaces, from sustainable materials to multi-functional furniture.',
-		author: 'Nisha Sharma',
-		authorImage:
-			'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80',
-	},
-	{
-		id: 2,
-		image: '/images/Desgin-Insights/home-interior-decor-trends-2024.jpg',
-		category: 'GUIDES',
-		date: 'April 28, 2024',
-		title: 'How to Choose the Right Color Palette for Your Home',
-		description:
-			"Expert tips on selecting colors that create harmony, reflect your personality, and enhance your home's atmosphere.",
-		author: 'Vikram Patel',
-		authorImage:
-			'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=100&q=80',
-	},
-	{
-		id: 3,
-		image:
-			'/images/Desgin-Insights/How_To_Choose_The_Perfect_Colour_Palette_For_Your_Home.png',
-		category: 'TIPS',
-		date: 'April 20, 2024',
-		title: 'Maximizing Small Spaces: Tips from the Experts',
-		description:
-			'Learn clever design strategies to make the most of compact living areas without compromising on style or comfort.',
-		author: 'Priya Singh',
-		authorImage:
-			'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80',
-	},
-	{
-		id: 4,
-		image: '/images/Desgin-Insights/istockphoto-1386479313-612x612.jpg',
-		category: 'TRENDS',
-		date: 'March 10, 2024',
-		title: 'Sustainable Interior Design: Eco-Friendly Choices',
-		description:
-			'Explore environmentally conscious design options, from recycled materials to energy-efficient solutions for a greener home.',
-		author: 'Rahul Sharma',
-		authorImage:
-			'https://images.unsplash.com/photo-1494790108755-2616b612b977?auto=format&fit=crop&w=100&q=80',
-	},
-];
+import blogUnifiedData from '@/app/data/blog/blogUnifiedData';
 
 export default function AdminBlogPostsPage() {
 	const { data: session, status } = useSession();
@@ -72,10 +21,15 @@ export default function AdminBlogPostsPage() {
 	const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 	const [selectedBlogPost, setSelectedBlogPost] = useState(null);
 
-	const filteredBlogPosts = blogPostsData.filter((post) => {
+	const posts = blogUnifiedData.posts;
+	const categories = blogUnifiedData.categories;
+	const authors = blogUnifiedData.authors;
+
+	const filteredBlogPosts = posts.filter((post) => {
 		const matchesSearch =
 			post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-			post.description.toLowerCase().includes(searchQuery.toLowerCase());
+			post.excerpt?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+			post.metaDescription?.toLowerCase().includes(searchQuery.toLowerCase());
 		const matchesFilter =
 			activeFilter === 'all' ||
 			post.category.toLowerCase() === activeFilter.toLowerCase();
@@ -125,10 +79,16 @@ export default function AdminBlogPostsPage() {
 						setSearchQuery={setSearchQuery}
 						activeFilter={activeFilter}
 						setActiveFilter={setActiveFilter}
+						categories={categories}
 					/>
 					<div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6'>
 						{filteredBlogPosts.map((post) => (
-							<BlogCard key={post.id} post={post} onEdit={handleEditBlogPost} />
+							<BlogCard
+								key={post.slug}
+								post={post}
+								onEdit={handleEditBlogPost}
+								authors={authors}
+							/>
 						))}
 					</div>
 				</div>
@@ -146,9 +106,15 @@ export default function AdminBlogPostsPage() {
 					<EditBlogForm
 						blogPost={selectedBlogPost}
 						onClose={handleCloseEditModal}
+						categories={categories}
+						authors={authors}
 					/>
 				) : (
-					<EditBlogForm onClose={handleCloseEditModal} />
+					<EditBlogForm
+						onClose={handleCloseEditModal}
+						categories={categories}
+						authors={authors}
+					/>
 				)}
 			</EditBlogModal>
 		</div>

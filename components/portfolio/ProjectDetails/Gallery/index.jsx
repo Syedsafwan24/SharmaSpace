@@ -1,10 +1,10 @@
 // app/portfolio/[slug]/page.jsx
-import Link from "next/link";
+import Link from 'next/link';
 import ProjectDetailsHeader from '@/components/portfolio/ProjectDetails/Header';
 import ProjectDetailsContent from '@/components/portfolio/ProjectDetails/Content';
 import ProjectGallery from '@/components/portfolio/ProjectDetails/Gallery';
 import CtaSection from '@/components/portfolio/ProjectDetails/CtaSection';
-import { portfolioProjects } from '@/data/portfolioData';
+import portfolioProjects from '@/app/data/portfolio/portfolioUnifiedData';
 
 export async function generateStaticParams() {
 	return portfolioProjects.map((project) => ({

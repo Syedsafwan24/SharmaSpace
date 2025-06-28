@@ -1,102 +1,45 @@
-## Admin Dashboard UI Recreation Plan
+## Todo List
 
-This plan outlines the steps to create a pixel-perfect recreation of the provided dashboard UI, adhering strictly to the specified color palette and design.
+- [x] Render recent messages widget on dashboard with only required things.
+- [x] Consolidate all blog data into a single JSON variable in `app/data/blogUnifiedData.js`.
+- [x] Update `app/blog/page.js` to use `blogUnifiedData.js`.
+- [x] Update `app/blog/[slug]/page.js` to use `blogUnifiedData.js`.
+- [x] Verify compatibility of `BlogCard.jsx`, `BlogPostHero.jsx`, `AuthorBio.jsx`, `BlogContent.jsx`, `RelatedTags.jsx`, and `RelatedArticlesSection.jsx` with the new data structure.
+- [x] Update `components/blog/BlogSection.jsx` to use `blogUnifiedData.js`.
+- [x] Update `app/admin/blog-posts/page.js` to use `blogUnifiedData.js`.
 
-### Phase 1: Setup and Layout
+## Review Section
 
-- [x] **Update `app/admin/dashboard/page.js`:**
-    - Set up the main dashboard layout (sidebar and main content area).
-    - Integrate new components into this layout.
+- Modified `components/admin/RecentMessages.js` to:
+  - Limit the displayed messages to the first three using `.slice(0, 3)`.
+  - Use `message.name` for the sender.
+  - Use `message.dateFormatted` for the message time.
+  - Use `message.message` for the message text.
+- Created `app/data/blogUnifiedData.js` with all blog posts, authors, and categories embedded in a single JavaScript object.
+- Updated import paths in `app/blog/page.js`, `app/blog/[slug]/page.js`, `components/blog/BlogSection.jsx`, and `app/admin/blog-posts/page.js` to use `blogUnifiedData.js`.
+- Adjusted data access in `app/admin/blog-posts/page.js` to use `blogPosts`, `unifiedBlogData.categories`, and `unifiedBlogData.authors`.
+- Confirmed compatibility of related blog components with the new unified data structure.
 
-- [x] **Create `components/admin/Sidebar.js`:**
-    - Implement the navigation sidebar with links for Dashboard, Projects, Services, Blog Posts, Testimonials, and Messages.
-    - Include the "Sharma Space" logo and "Admin Panel" text.
-    - Add the "Back to Website" link at the bottom.
-    - Use appropriate Lucide React icons for each menu item.
+# TODO: Blog Data Unification Refactor
 
-- [x] **Create `components/admin/DashboardHeader.js`:**
-    - Implement the "Dashboard" title and "Overview of your website content and analytics" subtitle.
+## Goal
 
-### Phase 2: Dashboard Widgets
+Refactor `app/data/blog/blogUnifiedData.js` into a pure data file (no logic, all fields resolved) so that both admin dashboard and public blog components can use a single, consistent data source. Ensure no change in rendered content or styling.
 
-- [x] **Create `components/admin/StatsCard.js`:**
-    - Design a reusable card component for displaying statistics (Total Projects, Total Services, Testimonials, Messages, Blog Posts).
-    - Ensure it matches the reference image's layout, typography, and colors.
-    - Use appropriate Lucide React icons.
+## Steps
 
-- [x] **Create `components/admin/RecentMessages.js`:**
-    - Implement the "Recent Messages" section, displaying sender, timestamp, and message snippet.
-    - Match the typography, spacing, and card design.
+- [ ] 1. Analyze the current structure of `blogUnifiedData.js` and the requirements of both admin and public blog components.
+- [ ] 2. Design the unified data structure:
+  - `posts`: Array of blog posts, each with all required fields, including fully resolved `author`, `category`, and `relatedArticles` (as objects, not slugs).
+  - `categories`: Array of categories.
+  - `authors`: Array of authors.
+- [ ] 3. Write a script or use a one-time transformation to process the current data and output a new pure data file (e.g., `blogUnifiedDataFinal.js` or `blogUnifiedData.json`).
+- [ ] 4. Remove all helper functions and logic from the data file. Only export the unified data object.
+- [ ] 5. Update all imports in admin and public blog components to use the new unified data file.
+- [ ] 6. Test both admin and public blog views to ensure content and styling are unchanged.
+- [ ] 7. Document the new data structure and update any relevant README or developer notes.
+- [ ] 8. Add a review section to this file summarizing the changes and confirming that the requirements were met.
 
-- [x] **Create `components/admin/ProjectCategories.js`:**
-    - Implement the "Project Categories" section with progress bars.
-    - Match the bar colors, percentages, and typography.
+---
 
-- [x] **Create `components/admin/RecentProjects.js`:**
-    - Implement the "Recent Projects" section with project images, titles, and categories.
-    - Match the layout, image sizes, and typography.
-
-### Phase 3: Styling and Refinement
-
-- [x] **Apply Global Styling and Refinements:**
-    - Ensure all components strictly adhere to the provided color palette:
-        - Primary: Soft White (#F8F9FA)
-        - Accent: Red (#E63946)
-        - Secondary: Charcoal Black (#1C1C1C)
-        - Highlight: Light Gray (#EDEDED)
-        - CTA: Deep Red (#D62828)
-    - Maintain identical proportions, spacing, alignment, line weights, and shadows as shown in the reference image.
-    - Use placeholder data for all dynamic content.
-
-### Phase 4: Projects Page Implementation
-
-- [x] **Create `app/admin/projects/page.js`:** Set up the main page structure, including the sidebar and top navbar (for responsiveness).
-- [x] **Create `components/admin/projects/ProjectHeader.js`:** Implement the page title, subtitle, and "Add New Project" button.
-- [x] **Create `components/admin/projects/ProjectSearchFilter.js`:** Implement the search input and category filter buttons.
-- [x] **Create `components/admin/projects/ProjectCard.js`:** Design a reusable component for each project entry, including image, details, and action buttons.
-- [x] **Integrate components**: Assemble these new components within `app/admin/projects/page.js`.
-- [x] **Apply pixel-perfect styling**: Ensure all elements match the reference image's proportions, colors, typography, and visual effects using the provided color palette.
-- [x] **Ensure responsiveness**: Make sure the layout adapts well to different screen sizes.
-- [x] **Make sure the filter are working**: Implement filtering logic for project categories and search query.
-
-### Phase 5: Edit Project Modal Implementation
-
-- [x] **Create `components/admin/projects/EditProjectModal.js`**: This will be the main modal wrapper, handling visibility and the close button.
-- [x] **Create `components/admin/projects/EditProjectForm.js`**: This component will contain all the input fields and logic for editing a project, including dynamic fields for images.
-- [x] **Create `components/admin/projects/ImageInput.js`**: A reusable sub-component for handling individual image URL inputs with previews.
-- [x] **Modify `components/admin/projects/ProjectCard.js`**: Add an "Edit" button that triggers the modal and passes project data.
-- [x] **Modify `app/admin/projects/page.js`**: Manage the modal's open/closed state and the selected project data.
-
-### Phase 6: Services Page Implementation
-
-- [x] **Create `app/admin/services/page.js`**: Set up the main page structure, including the sidebar and top navbar (for responsiveness).
-- [x] **Create `components/admin/services/ServiceHeader.js`**: Implement the page title, subtitle, and "Add New Service" button.
-- [x] **Create `components/admin/services/ServiceSearchFilter.js`**: Implement the search input.
-- [x] **Create `components/admin/services/ServiceCard.js`**: Design a reusable component for each service entry, including title, description, icon, and action buttons.
-- [x] **Create `components/admin/services/EditServiceModal.js`**: A modal for adding/editing services.
-- [x] **Create `components/admin/services/EditServiceForm.js`**: The form within the modal for service details.
-- [x] **Integrate components**: Assemble these new components within `app/admin/services/page.js`.
-- [x] **Apply pixel-perfect styling**: Ensure all elements match the reference image's proportions, colors, typography, and visual effects using the provided color palette.
-- [x] **Ensure responsiveness**: Make sure the layout adapts well to different screen sizes, including the floating "Add New Service" button for mobile.
-
-### Phase 7: Blog Posts Page Implementation
-
-- [x] **Create `app/admin/blog-posts/page.js`**: Set up the main page structure, including the sidebar and top navbar (for responsiveness).
-- [x] **Create `components/admin/blog-posts/BlogHeader.js`**: Implement the page title, subtitle, and "New Blog Post" button.
-- [x] **Create `components/admin/blog-posts/BlogSearchFilter.js`**: Implement the search input and category filter dropdown.
-- [x] **Create `components/admin/blog-posts/BlogCard.js`**: Design a reusable component for each blog post entry.
-- [x] **Create `components/admin/blog-posts/EditBlogModal.js`**: A modal for adding/editing blog posts.
-- [x] **Create `components/admin/blog-posts/EditBlogForm.js`**: The form within the modal for blog post details.
-- [x] **Integrate components**: Assemble these new components within `app/admin/blog-posts/page.js`.
-- [x] **Apply pixel-perfect styling**: Ensure all elements match the reference image's proportions, colors, typography, and visual effects using the provided color palette.
-- [x] **Ensure responsiveness**: Make sure the layout adapts well to different screen sizes, including the floating "New Blog Post" button for mobile.
-
-### Review
-
-- [ ] All visual elements match the reference images exactly.
-- [ ] Precise color palette is used, with no color substitutions.
-- [ ] Identical proportions, spacing, and alignment are maintained.
-- [ ] All details including shapes, line weights, textures, typography, shadows, highlights, and gradients are replicated.
-- [ ] Dimensions and scale match the original.
-- [ ] Specific design elements or unique characteristics are preserved.
-- [ ] Output is indistinguishable from the reference images when compared side-by-side.
+**Check in with the team before starting the refactor.**

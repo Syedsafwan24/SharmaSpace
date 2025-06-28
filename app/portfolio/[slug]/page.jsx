@@ -3,10 +3,10 @@ import ProjectDetailsContent from '@/components/portfolio/ProjectDetails/Project
 import ProjectGallery from '@/components/portfolio/ProjectDetails/ProjectGallery';
 import CtaSection from '@/components/portfolio/ProjectDetails/CtaSection';
 import Link from 'next/link';
-import { portfolioProjects } from '@/data/portfolioData';
+import portfolioProjects from '@/app/data/portfolio/portfolioUnifiedData';
 import Cta from '@/components/Cta';
 import Footer from '@/components/Footer';
-import Navigation from '@/components/Navigation'; // Ensure this import is present
+import Navigation from '@/components/Navigation';
 
 export async function generateStaticParams() {
 	return portfolioProjects.map((project) => ({
@@ -37,7 +37,7 @@ export default function ProjectDetail({ params }) {
 
 	return (
 		<div className='min-h-screen'>
-			<Navigation /> {/* Add the Navigation component here */}
+			<Navigation />
 			<ProjectDetailsHeader project={project} />
 			<div className='container mx-auto px-4 py-12'>
 				<ProjectDetailsContent project={project} />
@@ -53,7 +53,7 @@ export default function ProjectDetail({ params }) {
 				{/* Pass current project slug and category to CtaSection */}
 				<CtaSection
 					currentProjectSlug={project.slug}
-					currentProjectCategory={project.category}
+					currentProjectCategory={project.category.name}
 				/>
 			</div>
 			<Cta />

@@ -54,7 +54,7 @@ const ProjectCard = ({ project }) => {
 			{/* Category tag - unchanged */}
 			{project.category && (
 				<span className='absolute top-4 right-4 bg-black/70 text-white text-xs px-3 py-1 rounded-full backdrop-blur-sm'>
-					{project.category}
+					{project.category.name}
 				</span>
 			)}
 		</div>

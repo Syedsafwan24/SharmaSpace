@@ -1,7 +1,7 @@
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import BlogCard from '@/components/blog/BlogCard';
-import { blogPosts } from '@/app/data/blogPosts';
+import blogUnifiedData from '@/app/data/blog/blogUnifiedData';
 import BlogHero from '@/components/blog/BlogHero';
 import NewsletterSection from '@/components/blog/NewsletterSection';
 
@@ -12,6 +12,7 @@ export const metadata = {
 };
 
 export default function Blog() {
+	const posts = blogUnifiedData.posts;
 	return (
 		<div className='bg-gray-50'>
 			<Navigation />
@@ -23,7 +24,7 @@ export default function Blog() {
 						Latest trends, tips, and insights from our interior design experts.
 					</p>
 					<div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 text-left'>
-						{blogPosts.map((post) => (
+						{posts.map((post) => (
 							<BlogCard key={post.slug} post={post} />
 						))}
 					</div>

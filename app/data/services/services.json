@@ -1,216 +1,40 @@
 {
   "services": [
     {
-      "id": "residential-design",
+      "id": 1,
       "title": "Residential Design",
-      "slug": "residential-interior-design-bangalore",
-      "metaTitle": "Residential Interior Design Bangalore | Home Interiors | Sharma Space",
-      "metaDescription": "Expert residential interior design in Bangalore. Transform your home with personalized design solutions. Free consultation available.",
-      "description": "Tailored interiors for homes that reflect your personality and enhance your daily living experience. From cozy apartments to sprawling villas, we design homes that feel uniquely yours.",
-      "shortDescription": "Personalized home interior design solutions",
-      "icon": "Home",
-      "category": "Design Services",
-      "featured": true,
-      "priceRange": "₹8,00,000 - ₹50,00,000",
-      "duration": "2-4 months",
-      "image": {
-        "url": "/images/services/residential-design.jpg",
-        "alt": "Residential interior design Bangalore home living room",
-        "width": 800,
-        "height": 600
-      },
-      "features": [
-        "Complete home design consultation",
-        "3D visualization and walkthroughs", 
-        "Custom furniture design",
-        "Space planning and optimization",
-        "Material selection and sourcing",
-        "Project management and execution"
-      ],
-      "process": [
-        {
-          "step": 1,
-          "title": "Initial Consultation",
-          "description": "Understanding your lifestyle, preferences, and requirements"
-        },
-        {
-          "step": 2,
-          "title": "Design Development",
-          "description": "Creating concepts, mood boards, and 3D visualizations"
-        },
-        {
-          "step": 3,
-          "title": "Material Selection",
-          "description": "Choosing finishes, furniture, and accessories"
-        },
-        {
-          "step": 4,
-          "title": "Execution",
-          "description": "Project management and installation"
-        }
-      ],
-      "subServices": [
-        {
-          "name": "Living Room Design",
-          "description": "Create welcoming spaces for family and entertainment"
-        },
-        {
-          "name": "Bedroom Design", 
-          "description": "Design peaceful retreats for rest and relaxation"
-        },
-        {
-          "name": "Kitchen Design",
-          "description": "Functional and beautiful cooking spaces"
-        },
-        {
-          "name": "Bathroom Design",
-          "description": "Luxurious and practical bathroom solutions"
-        }
-      ],
-      "locations": ["Bangalore", "Whitefield", "Indiranagar", "Koramangala", "HSR Layout"],
-      "testimonials": [
-        {
-          "text": "Sharma Space transformed our apartment into a dream home. Every detail was perfect.",
-          "author": "Priya Sharma",
-          "location": "Indiranagar, Bangalore",
-          "rating": 5
-        }
-      ],
-      "faq": [
-        {
-          "question": "What is included in residential interior design services in Bangalore?",
-          "answer": "Our residential design includes space planning, 3D visualization, material selection, custom furniture design, and complete project execution with quality assurance."
-        },
-        {
-          "question": "How much does residential interior design cost in Bangalore?",
-          "answer": "Residential interior design costs range from ₹8,00,000 to ₹50,00,000 depending on space size, design complexity, and material choices. We provide detailed quotes after consultation."
-        }
-      ],
-      "keywords": ["residential interior design bangalore", "home interior design", "apartment design bangalore", "villa interior design"],
-      "seo": {
-        "focusKeyword": "residential interior design bangalore",
-        "keywordDensity": 2.0,
-        "schema": {
-          "@type": "Service",
-          "name": "Residential Interior Design",
-          "provider": {
-            "@type": "Organization",
-            "name": "Sharma Space"
-          },
-          "areaServed": "Bangalore, India",
-          "serviceType": "Interior Design"
-        }
-      }
+      "description": "Tailored interiors for homes that reflect your personality and enhance your daily living experience.",
+      "icon": "Sofa"
     },
     {
-      "id": "commercial-design",
+      "id": 2,
       "title": "Commercial Design",
-      "slug": "commercial-interior-design-bangalore",
-      "metaTitle": "Commercial Interior Design Bangalore | Office Interiors | Sharma Space",
-      "metaDescription": "Professional commercial interior design in Bangalore. Office spaces, retail stores, restaurants. Boost productivity with expert design.",
-      "description": "Functional and inspiring workspaces for businesses that boost productivity and reflect your brand identity. Creating environments that enhance employee satisfaction and client impressions.",
-      "shortDescription": "Professional commercial space design",
-      "icon": "Building",
-      "category": "Design Services",
-      "featured": true,
-      "priceRange": "₹15,00,000 - ₹1,00,00,000",
-      "duration": "3-6 months",
-      "image": {
-        "url": "/images/services/commercial-design.jpg",
-        "alt": "Commercial interior design Bangalore office space",
-        "width": 800,
-        "height": 600
-      },
-      "features": [
-        "Brand-aligned design concepts",
-        "Ergonomic workspace planning",
-        "Technology integration",
-        "Sustainable design solutions",
-        "Compliance with regulations",
-        "Turnkey project delivery"
-      ],
-      "process": [
-        {
-          "step": 1,
-          "title": "Business Analysis",
-          "description": "Understanding your business needs and brand identity"
-        },
-        {
-          "step": 2,
-          "title": "Space Planning",
-          "description": "Optimizing layout for productivity and flow"
-        },
-        {
-          "step": 3,
-          "title": "Design Development",
-          "description": "Creating detailed designs and specifications"
-        },
-        {
-          "step": 4,
-          "title": "Implementation",
-          "description": "Managing construction and installation"
-        }
-      ],
-      "subServices": [
-        {
-          "name": "Office Design",
-          "description": "Modern workspaces that enhance productivity"
-        },
-        {
-          "name": "Retail Design",
-          "description": "Attractive stores that drive sales"
-        },
-        {
-          "name": "Restaurant Design",
-          "description": "Memorable dining experiences"
-        },
-        {
-          "name": "Co-working Spaces",
-          "description": "Flexible collaborative environments"
-        }
-      ],
-      "locations": ["Bangalore", "Whitefield", "Electronic City", "Hebbal", "Marathahalli"],
-      "testimonials": [
-        {
-          "text": "Our new office design has significantly improved team collaboration and client meetings.",
-          "author": "Rajesh Kumar",
-          "location": "Whitefield, Bangalore",
-          "rating": 5
-        }
-      ],
-      "faq": [
-        {
-          "question": "What does commercial interior design include in Bangalore?",
-          "answer": "Commercial design includes space planning, brand integration, furniture selection, lighting design, technology setup, and complete project management for offices, retail, and hospitality spaces."
-        },
-        {
-          "question": "How long does commercial interior design take in Bangalore?",
-          "answer": "Commercial projects typically take 3-6 months depending on space size and complexity. We provide detailed timelines during the planning phase."
-        }
-      ],
-      "keywords": ["commercial interior design bangalore", "office interior design", "retail design bangalore", "workspace design"],
-      "seo": {
-        "focusKeyword": "commercial interior design bangalore",
-        "keywordDensity": 1.8,
-        "schema": {
-          "@type": "Service",
-          "name": "Commercial Interior Design",
-          "provider": {
-            "@type": "Organization",
-            "name": "Sharma Space"
-          },
-          "areaServed": "Bangalore, India",
-          "serviceType": "Commercial Interior Design"
-        }
-      }
+      "description": "Functional and inspiring workspaces for businesses that boost productivity and reflect your brand identity.",
+      "icon": "Building"
+    },
+    {
+      "id": 3,
+      "title": "Hospitality Design",
+      "description": "Creating memorable experiences for hotels and restaurants that leave lasting impressions on guests.",
+      "icon": "Hotel"
+    },
+    {
+      "id": 4,
+      "title": "Space Planning",
+      "description": "Optimize your layout for maximum functionality and flow, making the most of every square foot.",
+      "icon": "LayoutGrid"
+    },
+    {
+      "id": 5,
+      "title": "Furniture Selection",
+      "description": "Curated furniture choices that blend aesthetics and comfort for a cohesive interior design.",
+      "icon": "Chair"
+    },
+    {
+      "id": 6,
+      "title": "Renovation Consultation",
+      "description": "Expert guidance for your renovation projects, ensuring a smooth process and stunning results.",
+      "icon": "Hammer"
     }
-  ],
-  "metadata": {
-    "version": "1.0.0",
-    "lastUpdated": "2024-05-15T10:00:00Z",
-    "totalServices": 2,
-    "description": "Interior design services offered by Sharma Space",
-    "seoCompliance": "Bangalore-focused service descriptions with E-E-A-T compliance",
-    "location": "Bangalore, India"
-  }
+  ]
 }

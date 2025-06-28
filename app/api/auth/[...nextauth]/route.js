@@ -1,5 +1,3 @@
-export const runtime = 'nodejs';
-
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { PrismaClient } from '@/lib/generated/prisma';
@@ -24,28 +22,33 @@ const authOptions = {
           throw new Error("Please enter both email and password.");
         }
 
-        const user = await prisma.user.findUnique({ where: { email: credentials.email } });
+        try {
+          const user = await prisma.user.findUnique({ where: { email: credentials.email } });
 
-        if (!user) {
-          console.log('User not found for email:', credentials.email);
-          throw new Error("No user found with this email.");
+          if (!user) {
+            console.log('User not found for email:', credentials.email);
+            throw new Error("No user found with this email.");
+          }
+
+          console.log('User found:', user.email);
+          const isPasswordValid = await bcrypt.compare(credentials.password, user.password);
+
+          if (!isPasswordValid) {
+            console.log('Password validation failed for user:', user.email);
+            throw new Error("Incorrect password.");
+          }
+
+          console.log('Authorization successful for user:', user.email);
+          return { id: user.id, name: user.name, email: user.email };
+        } catch (error) {
+          console.error('Database error during authorization:', error);
+          throw new Error("Authentication failed. Please try again.");
         }
-
-        console.log('User found:', user.email);
-        const isPasswordValid = await bcrypt.compare(credentials.password, user.password);
-
-        if (!isPasswordValid) {
-          console.log('Password validation failed for user:', user.email);
-          throw new Error("Incorrect password.");
-        }
-
-        console.log('Authorization successful for user:', user.email);
-        return { id: user.id, name: user.name, email: user.email };
       },
     }),
   ],
   pages: {
-    signIn: "/login", // Specify the custom login page
+    signIn: "/login",
   },
   session: {
     strategy: "jwt",
@@ -58,20 +61,15 @@ const authOptions = {
       return token;
     },
     async session({ session, token }) {
-      session.user.id = token.id;
+      if (token) {
+        session.user.id = token.id;
+      }
       return session;
     },
   },
+  secret: process.env.NEXTAUTH_SECRET,
 };
 
-async function GET(req) {
-  const handler = NextAuth(authOptions);
-  return handler(req);
-}
+const handler = NextAuth(authOptions);
 
-async function POST(req) {
-  const handler = NextAuth(authOptions);
-  return handler(req);
-}
-
-export { GET, POST };
+export { handler as GET, handler as POST };

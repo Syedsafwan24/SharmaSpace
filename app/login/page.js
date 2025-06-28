@@ -47,7 +47,6 @@ export default function LoginPage() {
 
         <form onSubmit={handleSubmit}>
           {error && <p className="text-[#E63946] text-center mb-4 text-sm">{error}</p>}
-          }
           
           <div className="mb-4">
             <label htmlFor="email" className="block text-[#1C1C1C] text-sm font-bold mb-2">

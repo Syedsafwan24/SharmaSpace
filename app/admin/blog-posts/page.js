@@ -1,15 +1,14 @@
 'use client';
 
-import { useSession } from 'next-auth/react';
-import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
-import Sidebar from '@/components/admin/Sidebar';
-import TopNavbar from '@/components/admin/TopNavbar';
-import BlogHeader from '@/components/admin/blog-posts/BlogHeader';
-import BlogSearchFilter from '@/components/admin/blog-posts/BlogSearchFilter';
-import BlogCard from '@/components/admin/blog-posts/BlogCard';
-import EditBlogModal from '@/components/admin/blog-posts/EditBlogModal';
-import EditBlogForm from '@/components/admin/blog-posts/EditBlogForm';
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import Sidebar from "@/components/admin/Sidebar";
+import TopNavbar from "@/components/admin/TopNavbar";
+import BlogHeader from "@/components/admin/blog-posts/BlogHeader";
+import BlogSearchFilter from "@/components/admin/blog-posts/BlogSearchFilter";
+import BlogCard from "@/components/admin/blog-posts/BlogCard";
+import EditBlogModal from "@/components/admin/blog-posts/EditBlogModal";
+import EditBlogForm from "@/components/admin/blog-posts/EditBlogForm";
 import { PlusCircle } from 'lucide-react';
 import blogUnifiedData from '@/app/data/blog/blogUnifiedData';
 
@@ -36,20 +35,20 @@ export default function AdminBlogPostsPage() {
 		return matchesSearch && matchesFilter;
 	});
 
-	const handleEditBlogPost = (post) => {
-		setSelectedBlogPost(post);
-		setIsEditModalOpen(true);
-	};
+  const handleEditBlogPost = (post) => {
+    setSelectedBlogPost(post);
+    setIsEditModalOpen(true);
+  };
 
-	const handleAddBlogPost = () => {
-		setSelectedBlogPost(null);
-		setIsEditModalOpen(true);
-	};
+  const handleAddBlogPost = () => {
+    setSelectedBlogPost(null);
+    setIsEditModalOpen(true);
+  };
 
-	const handleCloseEditModal = () => {
-		setIsEditModalOpen(false);
-		setSelectedBlogPost(null);
-	};
+  const handleCloseEditModal = () => {
+    setIsEditModalOpen(false);
+    setSelectedBlogPost(null);
+  };
 
 	useEffect(() => {
 		if (status === 'unauthenticated') {

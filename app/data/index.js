@@ -1,11 +1,11 @@
 /**
  * Centralized Data Export Hub for Sharma Space
- *
+ * 
  * This file serves as the main entry point for all mock data used throughout
  * the Sharma Space interior design website. It provides a clean, organized
  * way to import data across components while maintaining SEO compliance
  * and E-E-A-T standards.
- *
+ * 
  * @version 1.0.0
  * @author Sharma Space Development Team
  * @compliance SEO 2024 Standards, E-E-A-T Guidelines
@@ -88,8 +88,8 @@ export const statsWithMetadata = getStatsWithMetadata();
 
 // SEO Helper Functions
 export const generateBlogPostSchema = (post) => {
-	const author = getAuthorBySlug(post.author.id);
-	return {
+  const author = getAuthorBySlug(post.author.id);
+  return {
 		'@context': 'https://schema.org',
 		'@type': 'Article',
 		headline: post.title,
@@ -101,7 +101,7 @@ export const generateBlogPostSchema = (post) => {
 			'@type': 'Person',
 			name: author?.name || post.author.name,
 			jobTitle: author?.title || post.author.specialization,
-		},
+    },
 		publisher: {
 			'@type': 'Organization',
 			name: 'Sharma Space',
@@ -109,16 +109,16 @@ export const generateBlogPostSchema = (post) => {
 				'@type': 'ImageObject',
 				url: '/images/icon/SharmaSpace-Logo.png',
 			},
-		},
+    },
 		mainEntityOfPage: {
 			'@type': 'WebPage',
 			'@id': `https://sharmaspace.in/blog/${post.slug}`,
 		},
-	};
+  };
 };
 
 export const generateProjectSchema = (project) => {
-	return {
+  return {
 		'@context': 'https://schema.org',
 		'@type': 'CreativeWork',
 		name: project.title,
@@ -127,45 +127,45 @@ export const generateProjectSchema = (project) => {
 		creator: {
 			'@type': 'Organization',
 			name: 'Sharma Space',
-		},
+    },
 		dateCreated: project.completedDate,
 		locationCreated: {
 			'@type': 'Place',
 			name: project.location,
-		},
+    },
 		genre: project.category.name,
-	};
+  };
 };
 
 // Data Validation
 export const validateDataIntegrity = () => {
-	const checks = {
-		blogPosts: blogPosts.length > 0,
-		portfolioProjects: portfolioProjects.length > 0,
-		services: services.length > 0,
-		testimonials: testimonials.length > 0,
-		teamMembers: teamMembers.length > 0,
+  const checks = {
+    blogPosts: blogPosts.length > 0,
+    portfolioProjects: portfolioProjects.length > 0,
+    services: services.length > 0,
+    testimonials: testimonials.length > 0,
+    teamMembers: teamMembers.length > 0,
 		partnerBrands: partnerBrands.length > 0,
-	};
-
-	const failedChecks = Object.entries(checks)
-		.filter(([key, value]) => !value)
-		.map(([key]) => key);
-
-	if (failedChecks.length > 0) {
-		console.warn('Data integrity check failed for:', failedChecks);
-	}
-
-	return failedChecks.length === 0;
+  };
+  
+  const failedChecks = Object.entries(checks)
+    .filter(([key, value]) => !value)
+    .map(([key]) => key);
+    
+  if (failedChecks.length > 0) {
+    console.warn('Data integrity check failed for:', failedChecks);
+  }
+  
+  return failedChecks.length === 0;
 };
 
 // Export all data for debugging/development
 export const allData = {
-	blog: { posts: blogPosts, categories: blogCategories, authors: blogAuthors },
-	services,
-	testimonials,
-	team: teamMembers,
-	contact: contactMessages,
+  blog: { posts: blogPosts, categories: blogCategories, authors: blogAuthors },
+  services,
+  testimonials,
+  team: teamMembers,
+  contact: contactMessages,
 	company: {
 		stats: companyStats,
 		info: companyInfo,
@@ -178,15 +178,15 @@ export const allData = {
 export const dataSystemMetadata = {
 	version: '1.0.0',
 	lastUpdated: '2024-05-15T10:00:00Z',
-	totalEntities: {
-		blogPosts: blogPosts.length,
-		portfolioProjects: portfolioProjects.length,
-		services: services.length,
-		testimonials: testimonials.length,
-		teamMembers: teamMembers.length,
-		contactMessages: contactMessages.length,
+  totalEntities: {
+    blogPosts: blogPosts.length,
+    portfolioProjects: portfolioProjects.length,
+    services: services.length,
+    testimonials: testimonials.length,
+    teamMembers: teamMembers.length,
+    contactMessages: contactMessages.length,
 		partnerBrands: partnerBrands.length,
-	},
+  },
 	seoCompliance: '2024 Google E-E-A-T Standards',
 	location: 'Bangalore, India',
 	description:

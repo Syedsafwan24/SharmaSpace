@@ -2,12 +2,12 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { LayoutDashboard, Folder, Settings, FileText, MessageSquare, Mail, LogOut, Globe } from 'lucide-react';
-import { signOut } from 'next-auth/react';
 
 const Sidebar = () => {
   const pathname = usePathname();
+  const router = useRouter();
 
   const navItems = [
     { name: 'Dashboard', href: '/admin/dashboard', icon: LayoutDashboard },
@@ -17,6 +17,11 @@ const Sidebar = () => {
     { name: 'Testimonials', href: '/admin/testimonials', icon: MessageSquare },
     { name: 'Messages', href: '/admin/messages', icon: Mail },
   ];
+
+  const handleLogout = () => {
+    localStorage.removeItem('currentUser');
+    router.push('/login');
+  };
 
   return (
     <>
@@ -54,7 +59,7 @@ const Sidebar = () => {
 
         <div className="p-6 border-t border-gray-200">
           <button
-            onClick={() => signOut({ callbackUrl: '/login' })}
+            onClick={handleLogout}
             className="flex items-center gap-3 w-full px-6 py-3 text-base font-medium text-gray-700 hover:bg-[#EDEDED] transition-colors duration-200 rounded-md"
           >
             <LogOut size={20} />

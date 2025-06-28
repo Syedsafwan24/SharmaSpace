@@ -24,6 +24,7 @@ export default function Contact() {
 				<HeroContact />
 			</main>
 			<Footer />
+			{/* Floating Social Icons */}
 		</div>
 	);
 }

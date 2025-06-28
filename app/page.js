@@ -1,8 +1,10 @@
 import AboutSection from '@/components/AboutSection';
 import Cta from '@/components/Cta';
 import DesignInsights from '@/components/DesignInsights';
+import Footer from '@/components/Footer';
 // Footer and Navigation imports removed - they are in layout.js
 import Hero from '@/components/Hero';
+import Navigation from '@/components/Navigation';
 import PartnerBrands from '@/components/PartnerBrands';
 import Portfolio from '@/components/PortfolioSection';
 import Process from '@/components/Process';
@@ -15,6 +17,8 @@ export default function Home() {
 	return (
 		<div>
 			{/* Navigation component removed - now handled in app/layout.js */}
+			<Navigation />
+
 			<main>
 				<Hero />
 				<AboutSection />
@@ -27,7 +31,7 @@ export default function Home() {
 				<Cta />
 			</main>
 			{/* Footer component removed - now handled in app/layout.js */}
-
+			<Footer />
 			{/* Floating Social Icons (kept here for homepage-specific rendering) */}
 			<div className='fixed right-6 bottom-6 flex flex-col gap-3 z-50'>
 				{/* WhatsApp */}

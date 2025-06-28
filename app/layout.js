@@ -143,13 +143,11 @@ export default function RootLayout({ children }) {
 					<QueryProvider>
 						<TooltipProvider>
 							{/* Navigation component, rendered once for the entire site */}
-							<Navigation />
 
 							{/* This is where your page content will be rendered */}
 							{children}
 
 							{/* Footer component, rendered once for the entire site */}
-							<Footer />
 
 							{/* WelcomeModal component for the popup, also rendered once */}
 							<WelcomeModal />

@@ -41,6 +41,7 @@ export default function RegisterPage() {
         
         <form onSubmit={handleSubmit}>
           {error && <p className="text-[#E63946] text-center mb-4 text-sm">{error}</p>}
+          }
           {success && (
             <p className="text-green-500 text-center mb-4 text-sm">
               Registration successful! Redirecting to login...

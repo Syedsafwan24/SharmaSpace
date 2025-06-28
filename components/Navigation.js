@@ -3,13 +3,11 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Instagram, Facebook, Youtube, Twitter, Menu, X } from 'lucide-react';
-import { useSession, signOut } from 'next-auth/react';
 
 const Navigation = () => {
 	const [isScrolled, setIsScrolled] = useState(false);
 	const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 	const pathname = usePathname();
-	const { data: session } = useSession();
 
 	const navItems = [
 		{ name: 'Home', path: '/' },

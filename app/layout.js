@@ -1,13 +1,10 @@
+import AuthSessionProvider from '@/components/AuthSessionProvider';
+import { QueryProvider } from '@/components/providers/query-provider';
+import { Toaster as Sonner } from '@/components/ui/sonner';
+import { Toaster } from '@/components/ui/toaster';
+import { TooltipProvider } from '@/components/ui/tooltip';
 import { Poppins } from 'next/font/google';
 import './globals.css';
-import { Toaster } from '@/components/ui/toaster';
-import { Toaster as Sonner } from '@/components/ui/sonner';
-import { TooltipProvider } from '@/components/ui/tooltip';
-import { QueryProvider } from '@/components/providers/query-provider';
-import AuthSessionProvider from '@/components/AuthSessionProvider';
-import Navigation from '@/components/Navigation';
-import Footer from '@/components/Footer';
-import WelcomeModal from '@/components/WelcomeModal'; // Import your WelcomeModal component
 
 const poppins = Poppins({
 	subsets: ['latin'],
@@ -150,7 +147,6 @@ export default function RootLayout({ children }) {
 							{/* Footer component, rendered once for the entire site */}
 
 							{/* WelcomeModal component for the popup, also rendered once */}
-							<WelcomeModal />
 
 							{/* Toasters for notifications */}
 							<Toaster />
